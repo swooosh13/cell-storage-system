@@ -1,17 +1,19 @@
 import React, {FC} from "react";
 import {createStackNavigator} from "@react-navigation/stack";
+import {Navigation} from '../components/Navigation'
 
-import SplashScreen from "../screens/authentication/OnboardingScreen";
 import SignInScreen from "../screens/authentication/SignInScreen";
 import SignUpScreen from "../screens/authentication/SignUpScreen";
-import OnboardingScreen from "../screens/authentication/OnboardingScreen";
+import SplashScreen from "../screens/authentication/SplashScreen";
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<Navigation>();
 
 const AuthenticationStackScreen: FC = () => {
   return (
-    <Stack.Navigator headerMode={"none"}>
-      <Stack.Screen name={"OnboardingScreen"} component={OnboardingScreen}/>
+    <Stack.Navigator screenOptions={{
+      header: () => null
+    }}>
+      <Stack.Screen name={"SplashScreen"} component={SplashScreen}/>
       <Stack.Screen name={"SignInScreen"} component={SignInScreen} />
       <Stack.Screen name={"SignUpScreen"} component={SignUpScreen} />
     </Stack.Navigator>
