@@ -1,13 +1,11 @@
 import React, {FC} from 'react';
 import AuthenticationStackScreen from "./AuthenticationStackScreen";
 import LoadAssets from "../components/LoadAssets";
-
+import {SafeAreaProvider} from 'react-native-safe-area-context'
 import {ThemeProvider} from "@shopify/restyle";
 import theme from "../components/Theme";
-
-const assets = {
-
-}
+import { assets } from '../screens/authentication/SplashScreen';
+import {StatusBar} from "react-native";
 
 const fonts = {
   "SFProDisplay-Bold": require("../../assets/fonts/SFProDisplay-Bold.ttf"),
@@ -21,9 +19,11 @@ const fonts = {
 const AppNavigationContainer: FC = () => {
   return (
     <ThemeProvider {...{theme}}>
-    <LoadAssets {...{fonts}}>
-        <AuthenticationStackScreen />
-    </LoadAssets>
+      <LoadAssets {...{fonts, assets}} >
+        <SafeAreaProvider >
+          <AuthenticationStackScreen/>
+        </SafeAreaProvider>
+      </LoadAssets>
     </ThemeProvider>
   )
 }

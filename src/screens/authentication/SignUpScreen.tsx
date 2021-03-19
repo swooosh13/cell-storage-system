@@ -1,12 +1,14 @@
 import React, {FC} from "react";
-import {Button, Text, View} from "react-native";
+import {Text} from 'react-native';
+import Container from "../../components/Container";
+import {Box} from "../../components/Theme";
+import {Google} from "../../components/SocialLogin";
+import {SocialLogin} from '../../components/SocialLogin'
 
 const SignUpScreen: FC<any> = ({navigation}: any) => {
   return (
-    <View>
-      <Text>Sign Up Screen</Text>
-      <Button title={"back"} onPress={() => navigation.navigate('SignInScreen')}/>
-    </View>
+    <Container footer={<SocialLogin />}>
+    </Container>
   )
 }
 

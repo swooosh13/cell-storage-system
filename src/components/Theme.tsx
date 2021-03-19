@@ -1,15 +1,18 @@
 import React, {FC} from 'react';
 import {BaseTheme, createBox, createText} from "@shopify/restyle";
+import {createTheme} from "@shopify/restyle";
 
-export const theme: BaseTheme | any  = {
+export const theme  = createTheme( {
   colors: {
     primary: '#5294f1',
+    secondary: "#0C0D34",
     body: 'white',
     title: '#0C0D34',
     text: 'rgba(12, 13, 52, 0.7)',
     white: 'white',
     grey: 'rgba(12, 13, 52, 0.05)',
-    button: '#0C0D34'
+    button: '#0C0D34',
+    red: 'red'
   },
   spacing: {
     s: 8,
@@ -34,18 +37,18 @@ export const theme: BaseTheme | any  = {
     title: {
       fontSize: 28,
       fontFamily: 'SFProDisplay-Semibold',
-      color: "title"
+      color: "secondary"
     },
     title1: {
       fontSize: 28,
       fontFamily: 'SFProDisplay-Semibold',
-      color: "title"
+      color: "secondary"
     },
     title2: {
       fontSize: 24,
       lineHeight: 30,
       fontFamily: 'SFProDisplay-Semibold',
-      color: "title"
+      color: "secondary"
     },
     body: {
       fontSize: 16,
@@ -60,7 +63,7 @@ export const theme: BaseTheme | any  = {
     }
   },
   breakpoints: {}
-}
+});
 
 export type Theme = typeof theme;
 

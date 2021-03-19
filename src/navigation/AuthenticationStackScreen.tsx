@@ -10,9 +10,7 @@ const Stack = createStackNavigator<Navigation>();
 
 const AuthenticationStackScreen: FC = () => {
   return (
-    <Stack.Navigator screenOptions={{
-      header: () => null
-    }}>
+    <Stack.Navigator headerMode={"none"}>
       <Stack.Screen name={"SplashScreen"} component={SplashScreen}/>
       <Stack.Screen name={"SignInScreen"} component={SignInScreen} />
       <Stack.Screen name={"SignUpScreen"} component={SignUpScreen} />

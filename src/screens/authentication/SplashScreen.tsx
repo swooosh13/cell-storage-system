@@ -3,17 +3,20 @@ import {Dimensions, Image, View} from "react-native";
 import Button from '../../components/Button'
 
 import theme, {Box, Text} from "../../components/Theme";
+import {StackNavigationProp} from "@react-navigation/stack";
+import {Navigation, StackNavigatorProps} from "../../components/Navigation";
 
 const {width} = Dimensions.get('window');
 
 const picture = {
-  src: require('../../../assets/adaptive-icon.png'),
-  width: 1024,
+  src: require('../../../assets/splash.png'),
+  width: 1800,
   height: 1024
 }
 
+export const assets = [picture.src];
 
-const SplashScreen = ({navigation}: any) => {
+const SplashScreen = ({navigation}: StackNavigatorProps<Navigation, "SplashScreen">) => {
   return (
     <Box flex={1} backgroundColor={"white"}>
       <Box flex={1}
@@ -24,6 +27,7 @@ const SplashScreen = ({navigation}: any) => {
 
         <Image source={picture.src}
                style={{
+                 marginBottom: 10,
                  width: width - theme.borderRadii.xl,
                  height: ((width - theme.borderRadii.xl) * picture.height) / picture.width
                }}/>
@@ -48,8 +52,8 @@ const SplashScreen = ({navigation}: any) => {
           <Text variant={"body"} textAlign={"center"}>
             Sign In. If you `r not sign in just sign up right now bruuuuuuuuuuuh!
           </Text>
-          <Button  label={"Have an account? Login"} variant={"primary"}/>
-          <Button  label={"Join us"} />
+          <Button  label={"Have an account? Login"} variant={"primary"} onPress={() => navigation.navigate('SignInScreen')}/>
+          <Button  label={"Join us"} onPress={() => navigation.navigate('SignUpScreen')} />
           <Button  variant={"transparent"} label={"Forgot Password"} />
         </Box>
       </Box>
