@@ -55,10 +55,12 @@ const Container: FC<IContainerProps> = ({children, footer}) => {
           {children}
         </Box>
       </Box>
-      <Box backgroundColor={"secondary"} paddingVertical={"s"} paddingTop={"m"}>
-        {footer}
-        <Box height={inserts.bottom}/>
-      </Box>
+
+        <Box backgroundColor={"secondary"} paddingVertical={"s"} paddingTop={"m"}>
+          {footer}
+          <Box height={inserts.bottom}/>
+        </Box>
+
     </Box>
   )
 }

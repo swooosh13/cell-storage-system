@@ -8,11 +8,14 @@ export const theme  = createTheme( {
     secondary: "#0C0D34",
     body: 'white',
     title: '#0C0D34',
-    text: 'rgba(12, 13, 52, 0.7)',
+    text: 'rgba(12, 13, 52, 0.5)',
     white: 'white',
     grey: 'rgba(12, 13, 52, 0.05)',
     button: '#0C0D34',
-    red: 'red'
+    red: 'red',
+    darkGrey: '#8A8D90',
+    danger: '#FF0058',
+    success: '#33cd63'
   },
   spacing: {
     s: 8,

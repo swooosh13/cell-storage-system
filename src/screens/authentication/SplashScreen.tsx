@@ -1,5 +1,5 @@
 import React from "react";
-import {Dimensions, Image, View} from "react-native";
+import {Dimensions, Image, StatusBar, View} from "react-native";
 import Button from '../../components/Button'
 
 import theme, {Box, Text} from "../../components/Theme";
@@ -19,6 +19,7 @@ export const assets = [picture.src];
 const SplashScreen = ({navigation}: StackNavigatorProps<Navigation, "SplashScreen">) => {
   return (
     <Box flex={1} backgroundColor={"white"}>
+      <StatusBar barStyle={"light-content"} hidden/>
       <Box flex={1}
            borderBottomRightRadius="xl"
            backgroundColor="grey"

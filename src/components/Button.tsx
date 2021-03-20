@@ -23,7 +23,7 @@ interface IButton {
   variant?: "default" | "primary" | "transparent";
   label?: string;
   onPress?: () => void;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 const Button: FC<IButton> = ({variant, label, onPress, children}) => {
