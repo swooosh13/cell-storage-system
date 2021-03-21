@@ -1,6 +1,10 @@
 import React, {FC} from "react";
-
 import {Navigation, StackNavigatorProps} from "../../components/Navigation";
+
+import {Formik} from 'formik';
+import * as Yup from 'yup';
+
+
 import Container from '../../components/Container';
 import {SocialLogin} from "../../components/SocialLogin";
 import Button from "../../components/Button";
@@ -9,19 +13,21 @@ import {Box, Text} from "../../components/Theme";
 import {TextInput} from "../../components/TextInput";
 import {Checkbox} from "../../components/CheckBox";
 
+const SignInSchema = Yup.object().shape({
+  password: Yup.string()
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
+  email: Yup.string().email('Invalid email').required('Required'),
+
+});
+
 
 interface ISignInProps {
   navigation: StackNavigatorProps<Navigation, "SignInScreen">;
 }
 
 const SignInScreen: FC<ISignInProps> = ({navigation}) => {
-
-  const emailValidator = (email: string): boolean => {
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email.toLowerCase().trim()));
-  }
-
-  const passwordValidator = (password: string) => true;
 
   const footer = (
     <>
@@ -55,32 +61,57 @@ const SignInScreen: FC<ISignInProps> = ({navigation}) => {
           Use your credentials below and login to your account
         </Text>
 
+        <Formik
+          initialValues={{email: '', password: '', remember: false}}
+          validationSchema={SignInSchema}
+          onSubmit={values => console.log(values)}>
+          {
+            ({
+               handleChange,
+               handleBlur,
+               handleSubmit,
+               values,
+               errors,
+               touched,
+              setFieldValue
+             }) => (
+              <Box>
+                <Box marginBottom={"m"}>
+                  <TextInput icon={"mail"}
+                             placeholder={"enter your email adress"}
+                             onChangeText={handleChange("email")}
+                             onBlur={handleBlur("email")}
+                             error={errors.email}
+                             touched={touched.email}/>
+                </Box>
 
-        <Box marginBottom={"m"}>
-          <TextInput icon={"mail"}
-                     placeholder={"Enter your email"}
-                     validator={emailValidator}/>
+                <TextInput icon={"lock"}
+                           onChangeText={handleChange("password")}
+                           onBlur={handleBlur("password")}
+                           placeholder={"Enter your password"}
+                           error={errors.password}
+                           touched={touched.password}
+                />
 
+                <Box flexDirection={"row"} justifyContent={"space-between"}>
+                  <Checkbox label={"remember me"}
+                            checked={values.remember}
+                            onChange={() => setFieldValue("remember", !values.remember)}/>
+                  <Button variant={"transparent"}>
+                    <Text variant={"button"} color={"primary"}> Forgot password?</Text>
+                  </Button>
+                </Box>
 
-        </Box>
+                <Box alignItems={"center"} marginTop={"xl"}>
+                  <Button variant={"primary"}
+                          onPress={handleSubmit}
+                          label={"Log into your account"}
+                  />
 
-        <TextInput icon={"lock"}
-                   placeholder={"Enter your password"}
-                   validator={passwordValidator}/>
-        <Box flexDirection={"row"} justifyContent={"space-between"}>
-          <Checkbox label={"remember me"}/>
-          <Button variant={"transparent"}>
-            <Text variant={"button"} color={"primary"}> Forgot password?</Text>
-          </Button>
-        </Box>
-
-        <Box alignItems={"center"} marginTop={"xl"}>
-          <Button variant={"primary"}
-                  onPress={() => true}
-                  label={"Log into your account"}
-          />
-
-        </Box>
+                </Box>
+              </Box>
+            )}
+        </Formik>
       </Box>
 
     </Container>

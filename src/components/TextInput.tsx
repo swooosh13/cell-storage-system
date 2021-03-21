@@ -5,37 +5,16 @@ import theme, {Box} from "./Theme";
 
 interface ITextInput extends RNTextInputProps {
   icon?: any | string;
-  validator: (input: string) => boolean;
+  touched?: boolean;
+  error?: string;
 }
-
-const Valid = true;
-const Invalid = false;
-const Pristine = null;
 
 const SIZE = theme.borderRadii.m * 2;
 
-type InputState = typeof Valid | typeof Invalid | typeof Pristine;
-
-export const TextInput: FC<ITextInput> = ({validator, icon, ...props}) => {
-  const [input, setInput] = useState("");
-  const [state, setState] = useState<InputState>(Pristine);
-
-  const reColor: keyof typeof theme.colors =
-    state === Pristine ? "text" : (state === Valid) ? "success" : "danger";
-
+export const TextInput: FC<ITextInput> = ({icon, touched, error,...props}) => {
+  const reColor = !touched ? "text" : (error ? "danger" : "success");
   const color = theme.colors[reColor];
 
-  const validate = () => {
-    const valid = validator(input);
-    setState(valid);
-  }
-
-  const onChangeInputText = (val: string) => {
-    setInput(val);
-    if (state !== Pristine) {
-      validate();
-    }
-  }
   return (
     <Box flexDirection={"row"}
          alignItems={"center"}
@@ -43,28 +22,27 @@ export const TextInput: FC<ITextInput> = ({validator, icon, ...props}) => {
          borderRadius={"m"}
          borderWidth={StyleSheet.hairlineWidth * 3}
          borderColor={reColor}>
-      <Box padding={"s"} >
+      <Box padding={"s"}>
         <Icon name={icon} {...{color}} size={16}/>
       </Box>
 
       <Box flex={1}>
         <RNTextInput
           {...props}
-          onBlur={validate}
-          onChangeText={onChangeInputText}
           placeholderTextColor={color}
         />
       </Box>
       {
-        (state === Valid || state === Invalid) && (
+        touched && (
           <Box borderRadius={"xl"}
                height={SIZE}
                width={SIZE}
                marginRight={"s"}
                alignItems={"center"}
                justifyContent={"center"}
-               backgroundColor={state === Valid ? "success" : "danger"}>
-            <Icon name={state === Valid ? "check" : "x"} color={"white"} size={12}/>
+               backgroundColor={!error ? "success" : "danger"}
+          >
+            <Icon name={!error ? "check" : "x"} color={"white"} size={12}/>
           </Box>
         )
       }
