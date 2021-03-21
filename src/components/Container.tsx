@@ -1,8 +1,8 @@
 import React, {FC, ReactNode} from 'react';
-import {Dimensions, StyleSheet, ViewStyle, StatusBar} from "react-native";
-import theme, {Box} from "./Theme";
+import {Dimensions, StyleSheet, StatusBar} from "react-native";
+import {Box, useTheme} from "./Theme";
 import {LinearGradient} from "expo-linear-gradient";
-import {useSafeArea, useSafeAreaInsets} from "react-native-safe-area-context";
+import { useSafeAreaInsets} from "react-native-safe-area-context";
 
 interface IContainerProps {
   children?: ReactNode;
@@ -18,6 +18,7 @@ const height = width * aspectRatio;
 
 const Container: FC<IContainerProps> = ({children, footer}) => {
   const inserts = useSafeAreaInsets();
+  const theme = useTheme();
 
   return (
     <Box flex={1} backgroundColor={"secondary"}>

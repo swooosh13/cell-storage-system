@@ -1,8 +1,7 @@
 import React, {ReactNode} from 'react';
 import Svg, {ClipPath, Defs, G, Path} from "react-native-svg";
-import theme, {Box, Text} from "./Theme";
+import {Box, Text, useTheme} from "./Theme";
 
-const SIZE = theme.borderRadii.l;
 
 export const Google = () => {
   return (
@@ -33,6 +32,7 @@ export const Google = () => {
 }
 
 const FacebookIcon = () => {
+
   return  <Svg
     width={25}
     height={25}
@@ -77,6 +77,9 @@ interface ISocialIconProps {
 }
 
 const SocialIcon = ({children}: ISocialIconProps) => {
+  const theme = useTheme();
+  const SIZE = theme.borderRadii.l;
+
   return (
     <Box marginHorizontal={"m"} backgroundColor={"white"}
          width={47}

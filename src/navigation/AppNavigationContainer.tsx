@@ -3,9 +3,9 @@ import AuthenticationStackScreen from "./AuthenticationStackScreen";
 import LoadAssets from "../components/LoadAssets";
 import {SafeAreaProvider} from 'react-native-safe-area-context'
 import {ThemeProvider} from "@shopify/restyle";
-import theme from "../components/Theme";
 import { assets } from '../screens/authentication/SplashScreen';
 import {StatusBar} from "react-native";
+import {theme} from '../components/Theme'
 
 const fonts = {
   "SFProDisplay-Bold": require("../../assets/fonts/SFProDisplay-Bold.ttf"),

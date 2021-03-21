@@ -2,8 +2,7 @@ import React from "react";
 import {Dimensions, Image, StatusBar, View} from "react-native";
 import Button from '../../components/Button'
 
-import theme, {Box, Text} from "../../components/Theme";
-import {StackNavigationProp} from "@react-navigation/stack";
+import {Box, Text, useTheme} from "../../components/Theme";
 import {Navigation, StackNavigatorProps} from "../../components/Navigation";
 
 const {width} = Dimensions.get('window');
@@ -17,6 +16,8 @@ const picture = {
 export const assets = [picture.src];
 
 const SplashScreen = ({navigation}: StackNavigatorProps<Navigation, "SplashScreen">) => {
+  const theme = useTheme();
+
   return (
     <Box flex={1} backgroundColor={"white"}>
       <StatusBar barStyle={"light-content"} hidden/>
