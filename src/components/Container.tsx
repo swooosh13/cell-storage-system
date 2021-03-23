@@ -3,6 +3,7 @@ import {Dimensions, StyleSheet, StatusBar} from "react-native";
 import {Box, useTheme} from "./Theme";
 import {LinearGradient} from "expo-linear-gradient";
 import { useSafeAreaInsets} from "react-native-safe-area-context";
+import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 
 interface IContainerProps {
   children?: ReactNode;
@@ -12,7 +13,6 @@ interface IContainerProps {
 export const assets = [require('../../assets/tech_life.png')];
 const {width} = Dimensions.get('window');
 
-// TODO Login 5
 const aspectRatio = 750 / 1125;
 const height = width * aspectRatio;
 
@@ -53,7 +53,9 @@ const Container: FC<IContainerProps> = ({children, footer}) => {
              borderTopLeftRadius={0}
              borderRadius={"xl"}
              flex={1}>
-          {children}
+          <KeyboardAwareScrollView>
+            {children}
+          </KeyboardAwareScrollView>
         </Box>
       </Box>
 

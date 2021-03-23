@@ -6,10 +6,11 @@ export interface StackNavigatorProps<
   RouteName extends keyof ParamList = string >{
     navigation: StackNavigationProp<ParamList, RouteName>;
     route: RouteProp<ParamList, RouteName>
-  }
+}
 
 export type Navigation = {
   SplashScreen: undefined;
   SignInScreen: undefined;
   SignUpScreen: undefined;
+  ForgotPasswordScreen: undefined;
 }
