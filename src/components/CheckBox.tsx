@@ -3,7 +3,7 @@ import {TouchableOpacity, View} from 'react-native';
 import CheckBox from "@react-native-community/checkbox";
 import {Box, Text} from "./Theme";
 import {Feather as Icon} from "@expo/vector-icons";
-import {RectButton} from "react-native-gesture-handler";
+import {BorderlessButton, RectButton} from "react-native-gesture-handler";
 
 interface ICheckBox {
   label: string;
@@ -14,7 +14,7 @@ interface ICheckBox {
 export const Checkbox: FC<ICheckBox> = ({label, checked, onChange}) => {
 
   return (
-    <RectButton onPress={() => onChange()}
+    <BorderlessButton onPress={() => onChange()}
                 style={{justifyContent: "center"}}>
       <Box flexDirection={"row"} alignItems={"center"}>
         <Box alignItems={"center"}
@@ -29,6 +29,6 @@ export const Checkbox: FC<ICheckBox> = ({label, checked, onChange}) => {
         </Box>
         <Text variant={""}>{label}</Text>
       </Box>
-    </RectButton>
+    </BorderlessButton>
   )
 }

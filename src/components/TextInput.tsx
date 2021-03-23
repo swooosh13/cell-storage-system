@@ -1,18 +1,17 @@
-import React, {FC, forwardRef, RefObject} from 'react';
+import React, {forwardRef} from 'react';
 import {StyleSheet, TextInput as RNTextInput, TextInputProps as RNTextInputProps} from 'react-native';
 import {Feather as Icon} from '@expo/vector-icons';
-import {Box, useTheme} from "./Theme";
+import {Box, useTheme, Text} from "./Theme";
 
-interface ITextInput extends RNTextInputProps {
+interface ITextInputProps extends RNTextInputProps {
   icon?: string | any;
   touched?: boolean;
   error?: string;
 
 }
 
-
-export const TextInput = forwardRef(
-  ({icon, touched, error, ...props}: ITextInput,
+export const TextInput = forwardRef<RNTextInput, ITextInputProps>(
+  ({icon, touched, error, ...props},
    ref) => {
     const theme = useTheme();
     const SIZE = theme.borderRadii.m * 2.5;
@@ -32,7 +31,6 @@ export const TextInput = forwardRef(
         </Box>
 
         <Box flex={1}>
-          {/*@ts-ignore*/}
           <RNTextInput
             {...{ref}}
             {...props}

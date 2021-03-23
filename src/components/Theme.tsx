@@ -15,7 +15,11 @@ export const theme  = createTheme( {
     red: 'red',
     darkGrey: '#8A8D90',
     danger: '#FF0058',
-    success: '#33cd63'
+    success: '#33cd63',
+    primaryLight: '#e6f7f9',
+    primary_green: '#29afa5',
+    primary_analogue: '#2956af',
+    primary_greenLight: "#e3f5f5"
   },
   spacing: {
     s: 8,
@@ -61,7 +65,7 @@ export const theme  = createTheme( {
     },
     button: {
       fontSize: 15,
-      fontFamily: 'SFProDisplay-Medium', // Добавить SF-Pro-TextMedium
+      fontFamily: 'SFProDisplay-Medium',
       color: "text"
     }
   },

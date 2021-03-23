@@ -3,7 +3,8 @@ import {Dimensions, Image, StatusBar, View} from "react-native";
 import Button from '../../components/Button'
 
 import {Box, Text, useTheme} from "../../components/Theme";
-import {Navigation, StackNavigatorProps} from "../../components/Navigation";
+import {AuthenticationRoutes, StackNavigatorProps} from "../../components/Navigation";
+import {BorderlessButton} from "react-native-gesture-handler";
 
 const {width} = Dimensions.get('window');
 
@@ -15,7 +16,7 @@ const picture = {
 
 export const assets = [picture.src];
 
-const SplashScreen = ({navigation}: StackNavigatorProps<Navigation, "SplashScreen">) => {
+const SplashScreen = ({navigation}: StackNavigatorProps<AuthenticationRoutes, "SplashScreen">) => {
   const theme = useTheme();
 
   return (
@@ -47,16 +48,21 @@ const SplashScreen = ({navigation}: StackNavigatorProps<Navigation, "SplashScree
              flex={1}
              alignItems={"center"}
              justifyContent={"space-evenly"}
-        padding={"xl"}>
+             padding={"xl"}>
           <Text variant={"title2"}>
             Let`s get Started
           </Text>
           <Text variant={"body"} textAlign={"center"}>
             Sign In. If you `r not sign in just sign up right now bruuuuuuuuuuuh!
           </Text>
-          <Button  label={"Have an account? Login"} variant={"primary"} onPress={() => navigation.navigate('SignInScreen')}/>
-          <Button  label={"Join us"} onPress={() => navigation.navigate('SignUpScreen')} />
-          <Button  variant={"transparent"} label={"Forgot Password"} />
+          <Button label={"Have an account? Login"} variant={"primary"}
+                  onPress={() => navigation.navigate('SignInScreen')}/>
+          <Button label={"Join us"} onPress={() => navigation.navigate('SignUpScreen')}/>
+
+          <BorderlessButton onPress={() => navigation.navigate('ForgotPasswordScreen')}>
+            <Text variant={"button"} color={"secondary"}>Forgot password ?</Text>
+          </BorderlessButton>
+
         </Box>
       </Box>
     </Box>

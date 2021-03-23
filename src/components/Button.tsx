@@ -1,5 +1,5 @@
-import React, {FC, ReactNode} from 'react';
-import { Text, StyleSheet} from "react-native";
+import React, {FC} from 'react';
+import {Text, StyleSheet} from "react-native";
 import {RectButton} from "react-native-gesture-handler";
 import {useTheme} from "@shopify/restyle";
 import {Theme} from "./Theme";
@@ -20,10 +20,9 @@ const styles = StyleSheet.create({
 })
 
 interface IButton {
-  variant?: "default" | "primary" | "transparent";
+  variant?: "default" | "primary";
   label?: string;
   onPress?: () => void;
-  children?: ReactNode;
 }
 
 const Button: FC<IButton> = ({variant, label, onPress, children}) => {
@@ -31,20 +30,16 @@ const Button: FC<IButton> = ({variant, label, onPress, children}) => {
 
   const backgroundColor = variant === "primary"
     ? theme.colors.primary
-    : variant === "transparent"
-    ? "transparent"
     : theme.colors.grey;
   const color = variant === "primary" ? theme.colors.white : theme.colors.secondary;
 
   return (
-   <RectButton style={[styles.container, {backgroundColor}]} {...{onPress}}>
-     {children ? children : (
-       <Text style={[styles.label, {color}]}>{label}</Text>
-     )}
-       </RectButton>
+    <RectButton style={[styles.container, {backgroundColor}]} {...{onPress}}>
+      <Text style={[styles.label, {color}]}>{label}</Text>
+    </RectButton>
   )
 };
 
-Button.defaultProps = {variant : "default"}
+Button.defaultProps = {variant: "default"}
 
 export default Button;

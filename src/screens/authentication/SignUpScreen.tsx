@@ -1,5 +1,6 @@
 import React, {useRef} from "react";
-import {Navigation, StackNavigatorProps} from "../../components/Navigation";
+import {AuthenticationRoutes, StackNavigatorProps} from "../../components/Navigation";
+import {Linking, TextInput as RNTextInput} from "react-native";
 
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
@@ -21,23 +22,22 @@ const SignUpSchema = Yup.object().shape({
     .required('Required'),
   passwordConfirmation: Yup.string()
     .equals([Yup.ref("password")], "Passwords do not match")
-    .required("required"),
+    .required("Required"),
   email: Yup.string()
     .email('Invalid email')
     .required('Required'),
 
 });
 
-const SignUpScreen = ({navigation}: StackNavigatorProps<Navigation, "SignUpScreen">) => {
+const SignUpScreen = ({navigation}: StackNavigatorProps<AuthenticationRoutes, "SignUpScreen">) => {
 
-  const footer = (
-    <Footer title={"If you don`t have a account"}
-            action={"Sign Up"}
-            onPress={() => navigation.navigate('ForgotPasswordScreen')}/>
-  )
+  const footer = (<Footer title={"Don`t work ? "}
+                          action={"Try something else"}
+                          onPress={() => Linking.openURL("https://support.google.com/")}/>);
 
-  const password = useRef<typeof TextInput>(null);
-  const passwordConfirmation = useRef<typeof TextInput>(null);
+
+  const password = useRef<RNTextInput>(null);
+  const passwordConfirmation = useRef<RNTextInput>(null);
 
   const {
     handleChange,
@@ -68,7 +68,7 @@ const SignUpScreen = ({navigation}: StackNavigatorProps<Navigation, "SignUpScree
         </Text>
 
 
-        <Box>
+        <Box marginTop={"l"}>
           <Box marginBottom={"m"}>
             <TextInput icon={"mail"}
                        placeholder={"enter your email adress"}
@@ -80,12 +80,10 @@ const SignUpScreen = ({navigation}: StackNavigatorProps<Navigation, "SignUpScree
                        autoCompleteType={"email"}
                        returnKeyType={"next"}
                        returnKeyLabel={"next"}
-                       // @ts-ignore
                        onSubmitEditing={() => password.current?.focus()}/>
           </Box>
 
           <Box marginBottom={"m"}>
-
             <TextInput icon={"lock"}
                        ref={password}
                        onChangeText={handleChange("password")}
@@ -97,7 +95,6 @@ const SignUpScreen = ({navigation}: StackNavigatorProps<Navigation, "SignUpScree
                        secureTextEntry
                        returnKeyType={"next"}
                        returnKeyLabel={"next"}
-                       // @ts-ignore
                        onSubmitEditing={() => passwordConfirmation.current?.focus()}
             />
           </Box>
@@ -120,7 +117,7 @@ const SignUpScreen = ({navigation}: StackNavigatorProps<Navigation, "SignUpScree
           <Box alignItems={"center"} marginTop={"xl"}>
             <Button variant={"primary"}
                     onPress={handleSubmit}
-                    label={"Log into your account"}
+                    label={"Create an account"}
             />
 
           </Box>

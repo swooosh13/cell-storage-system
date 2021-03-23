@@ -8,9 +8,22 @@ export interface StackNavigatorProps<
     route: RouteProp<ParamList, RouteName>
 }
 
-export type Navigation = {
+
+// TODO поменять на AuthenticationStackRoutes
+export type AuthenticationRoutes = {
   SplashScreen: undefined;
   SignInScreen: undefined;
   SignUpScreen: undefined;
   ForgotPasswordScreen: undefined;
+  ChangedPasswordScreen: undefined;
+}
+
+export type AppRoutes = {
+  AuthenticationNavigator: undefined;
+  HomeNavigator: undefined;
+}
+
+export type HomeRoutes = {
+  FindScreen:  undefined;
+  AboutScreen: undefined;
 }

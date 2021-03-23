@@ -1,18 +1,18 @@
 import React, {FC, useRef} from "react";
-import {Navigation, StackNavigatorProps} from "../../components/Navigation";
+import {AuthenticationRoutes, StackNavigatorProps} from "../../components/Navigation";
+import {TextInput as RNTextInput} from "react-native";
 
-import {Formik, useFormik} from 'formik';
+import {useFormik} from 'formik';
 import * as Yup from 'yup';
 
-
 import Container from '../../components/Container';
-import {SocialLogin} from "../../components/SocialLogin";
 import Button from "../../components/Button";
 import {Box, Text} from "../../components/Theme";
 
 import {TextInput} from "../../components/TextInput";
 import {Checkbox} from "../../components/CheckBox";
 import Footer from "../../components/Footer";
+import {BorderlessButton} from "react-native-gesture-handler";
 
 const SignInSchema = Yup.object().shape({
   password: Yup.string()
@@ -24,7 +24,7 @@ const SignInSchema = Yup.object().shape({
 });
 
 
-const SignInScreen = ({navigation}: StackNavigatorProps<Navigation, "SignInScreen">) => {
+const SignInScreen = ({navigation}: StackNavigatorProps<AuthenticationRoutes, "SignInScreen">) => {
 
   const footer = (
     <Footer title={"If you don`t have a account"}
@@ -32,7 +32,7 @@ const SignInScreen = ({navigation}: StackNavigatorProps<Navigation, "SignInScree
             onPress={() => navigation.navigate('SignUpScreen')}/>
   )
 
-  const password = useRef<typeof TextInput>(null);
+  const password = useRef<RNTextInput>(null);
 
   const {
     handleChange,
@@ -45,12 +45,14 @@ const SignInScreen = ({navigation}: StackNavigatorProps<Navigation, "SignInScree
   } = useFormik({
     initialValues: {email: "", password: '', remember: true},
     validationSchema: SignInSchema,
-    onSubmit: (values) => console.log(values)
+    onSubmit: (values) => navigation.navigate("HomeNavigator")
   });
 
   return (
     <Container {...{footer}} >
-      <Box padding={"l"} marginBottom={"l"}>
+      <Box padding={"l"} marginBottom={"l"}
+           alignItems={"stretch"} justifyContent={"center"}>
+
         <Text variant={"title1"}
               textAlign={"center"}
               marginBottom={"m"}>
@@ -63,7 +65,7 @@ const SignInScreen = ({navigation}: StackNavigatorProps<Navigation, "SignInScree
         </Text>
 
 
-        <Box>
+        <Box marginTop={"l"}>
           <Box marginBottom={"m"}>
             <TextInput icon={"mail"}
                        placeholder={"enter your email adress"}
@@ -73,7 +75,6 @@ const SignInScreen = ({navigation}: StackNavigatorProps<Navigation, "SignInScree
                        touched={touched.email}
                        autoCapitalize={"none"}
                        autoCompleteType={"email"}
-                       // @ts-ignore
                        onSubmitEditing={() => password.current?.focus()}/>
           </Box>
 
@@ -86,16 +87,20 @@ const SignInScreen = ({navigation}: StackNavigatorProps<Navigation, "SignInScree
                      secureTextEntry
                      returnKeyType={"go"}
                      returnKeyLabel={"go"}
-                     onSubmitEditing={ () => handleSubmit()}
+                     onSubmitEditing={() => handleSubmit()}
           />
 
-          <Box flexDirection={"row"} justifyContent={"space-between"}>
+          <Box marginVertical={"s"}
+               flexDirection={"row"}
+               alignItems={"center"}
+               justifyContent={"space-between"}>
             <Checkbox label={"remember me"}
                       checked={values.remember}
                       onChange={() => setFieldValue("remember", !values.remember)}/>
-            <Button variant={"transparent"} onPress={() => navigation.navigate('ForgotPasswordScreen')}>
+
+            <BorderlessButton onPress={() => navigation.navigate('ForgotPasswordScreen')}>
               <Text variant={"button"} color={"primary"}> Forgot password?</Text>
-            </Button>
+            </BorderlessButton>
           </Box>
 
           <Box alignItems={"center"} marginTop={"xl"}>
