@@ -1,18 +1,19 @@
 import React, {FC} from 'react';
-import AuthenticationStackScreen from "./AuthenticationNavigator";
+
 import LoadAssets from "../components/LoadAssets";
 import {SafeAreaProvider} from 'react-native-safe-area-context'
 import {ThemeProvider} from "@shopify/restyle";
 import {assets} from '../screens/authentication/SplashScreen';
 
 import {theme} from '../components/Theme'
-import {createDrawerNavigator} from "@react-navigation/drawer";
-import AuthenticationStackNavigator from "./AuthenticationNavigator";
+
 import {createStackNavigator} from "@react-navigation/stack";
 import {AppRoutes} from "../components/Navigation";
-import HomeDrawerNavigator from "./HomeNavigator";
-import AuthenticationNavigator from "./AuthenticationNavigator";
-import HomeNavigator from "./HomeNavigator";
+
+import {Provider} from "react-redux";
+import {PersistGate} from "redux-persist/integration/react";
+import {store, persistor} from '../redux/store';
+import MainNavigationContainer from "./MainNavigationContainer";
 
 const fonts = {
   "SFProDisplay-Bold": require("../../assets/fonts/SFProDisplay-Bold.ttf"),
@@ -23,20 +24,19 @@ const fonts = {
   "SFProDisplay-Light": require("../../assets/fonts/SFProDisplay-Light.ttf"),
 };
 
-const AppStack = createStackNavigator<AppRoutes>();
-
-const AppNavigationContainer: FC = () => {
+const AppMainNavigationContainer: FC = () => {
+  // TODO useEffect firebase auth
   return (
-    <ThemeProvider {...{theme}}>
-      <LoadAssets {...{fonts, assets}} >
-        <SafeAreaProvider>
-          <AppStack.Navigator headerMode={"none"}>
-            <AppStack.Screen name={"AuthenticationNavigator"} component={AuthenticationNavigator}/>
-          </AppStack.Navigator>
-        </SafeAreaProvider>
-      </LoadAssets>
-    </ThemeProvider>
+    <SafeAreaProvider>
+        <ThemeProvider {...{theme}}>
+          <Provider store={store}>
+            <PersistGate persistor={persistor} loading={null}>
+              <MainNavigationContainer/>
+            </PersistGate>
+          </Provider>
+        </ThemeProvider>
+    </SafeAreaProvider>
   )
-}
+};
 
-export default AppNavigationContainer;
+export default AppMainNavigationContainer;

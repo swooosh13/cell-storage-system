@@ -26,8 +26,10 @@ export const logout = () => async (dispatch: any) => {
   dispatch({type: authTypes.LOGOUT});
 }
 
-// TODO
-export const register = (foundUser: any) => async (dispatch: any) => {
+type User = {email: string; userToken: string};
+
+// TODO - dispatch
+export const register = (foundUser: User) => async (dispatch: any) => {
   const userToken = JSON.stringify(foundUser.userToken);
   const userEmail = foundUser.email;
 

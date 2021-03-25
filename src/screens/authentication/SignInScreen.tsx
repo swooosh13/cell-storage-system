@@ -13,6 +13,8 @@ import {TextInput} from "../../components/TextInput";
 import {Checkbox} from "../../components/CheckBox";
 import Footer from "../../components/Footer";
 import {BorderlessButton} from "react-native-gesture-handler";
+import {useDispatch} from "react-redux";
+import {login} from "../../redux/actions/authActions";
 
 const SignInSchema = Yup.object().shape({
   password: Yup.string()
@@ -25,6 +27,7 @@ const SignInSchema = Yup.object().shape({
 
 
 const SignInScreen = ({navigation}: StackNavigatorProps<AuthenticationRoutes, "SignInScreen">) => {
+  const dispatch = useDispatch();
 
   const footer = (
     <Footer title={"If you don`t have a account"}
@@ -45,7 +48,10 @@ const SignInScreen = ({navigation}: StackNavigatorProps<AuthenticationRoutes, "S
   } = useFormik({
     initialValues: {email: "", password: '', remember: true},
     validationSchema: SignInSchema,
-    onSubmit: (values) => console.log(values)
+    onSubmit: (values) => {
+      console.log(values);
+      dispatch(login({email: values.email, userToken: values.email + Date.now().toString()}));
+    }
   });
 
   return (
