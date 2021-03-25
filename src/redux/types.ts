@@ -1,0 +1,6 @@
+export enum authTypes {
+  LOGIN = "LOGIN",
+  LOGOUT=  "LOGOUT",
+  REGISTER = "REGISTER",
+  RETREIVE_TOKEN = "RETREIVE_TOKEN"
+}

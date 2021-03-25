@@ -32,7 +32,6 @@ const AppNavigationContainer: FC = () => {
         <SafeAreaProvider>
           <AppStack.Navigator headerMode={"none"}>
             <AppStack.Screen name={"AuthenticationNavigator"} component={AuthenticationNavigator}/>
-            <AppStack.Screen name={"HomeNavigator"} component={HomeNavigator}/>
           </AppStack.Navigator>
         </SafeAreaProvider>
       </LoadAssets>

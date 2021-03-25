@@ -45,7 +45,7 @@ const SignInScreen = ({navigation}: StackNavigatorProps<AuthenticationRoutes, "S
   } = useFormik({
     initialValues: {email: "", password: '', remember: true},
     validationSchema: SignInSchema,
-    onSubmit: (values) => navigation.navigate("HomeNavigator")
+    onSubmit: (values) => console.log(values)
   });
 
   return (

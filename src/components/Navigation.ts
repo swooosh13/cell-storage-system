@@ -8,8 +8,6 @@ export interface StackNavigatorProps<
     route: RouteProp<ParamList, RouteName>
 }
 
-
-// TODO поменять на AuthenticationStackRoutes
 export type AuthenticationRoutes = {
   SplashScreen: undefined;
   SignInScreen: undefined;
