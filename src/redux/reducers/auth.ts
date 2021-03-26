@@ -6,12 +6,6 @@ export interface IAuthState {
   userEmail: string | null;
   userToken: string | null;
 }
-//TODO
-export interface IAuthAction {
-  isLoading?: boolean;
-  userEmail?: string | null;
-  userToken: string | null;
-}
 
 const initialState: IAuthState = {
   isLoading: true,

@@ -17,7 +17,7 @@ const Footer: FC<IFooterProps> = ({onPress, title, action}) => {
       <Box alignItems={"center"} marginTop={"m"}>
         <BorderlessButton {...{onPress}}>
           <Text variant={"button"} color={"white"}>
-            <Text>{`${title} `}</Text>
+            <Text color={"darkGrey"}>{`${title} `}</Text>
             <Text color={"primary"}>{action}</Text>
           </Text>
         </BorderlessButton>

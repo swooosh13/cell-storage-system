@@ -1,6 +1,6 @@
 import React, {FC, ReactNode} from 'react';
 import {Dimensions, StyleSheet, Platform} from "react-native";
-import {Box, useTheme} from "./Theme";
+import {Box, Theme, useTheme} from "./Theme";
 import {LinearGradient} from "expo-linear-gradient";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
 import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
@@ -23,13 +23,13 @@ const Container: FC<IContainerProps> = ({children, footer}) => {
 
   return (
     <KeyboardAwareScrollView scrollEnabled={false}>
-      <Box height={wHeight + (Platform.OS === 'android' ? Constants.statusBarHeight : 0)} backgroundColor={"secondary"}>
+      <Box height={wHeight + (Platform.OS === 'android' ? Constants.statusBarHeight : 0)} backgroundColor={"greyLight"}>
 
         <Box backgroundColor={"white"}>
           <Box borderBottomLeftRadius={"xl"}
                overflow="hidden"
                height={height * 0.3}>
-            <LinearGradient colors={["#00d2ff", '#3a7bd5']}
+            <LinearGradient colors={['#1f4ca6', '#032ca6']}
                             start={{x: 1, y: 0}}
                             end={{x: 0, y: 0}}
                             style={{
@@ -41,7 +41,7 @@ const Container: FC<IContainerProps> = ({children, footer}) => {
           </Box>
         </Box>
         <Box flex={1} overflow={"hidden"}>
-          <LinearGradient colors={["#00d2ff", '#3a7bd5']}
+          <LinearGradient colors={['#1f4ca6' , '#032ca6']}
                           start={{x: 1, y: 0}}
                           end={{x: 0, y: 0}}
                           style={{
@@ -61,7 +61,7 @@ const Container: FC<IContainerProps> = ({children, footer}) => {
           </Box>
         </Box>
 
-        <Box backgroundColor={"secondary"} paddingVertical={"s"} paddingTop={"m"} marginBottom={"l"}>
+        <Box backgroundColor={'greyLight'} paddingVertical={"s"} paddingTop={"m"} marginBottom={"l"}>
           {footer}
           <Box height={inserts.bottom}/>
         </Box>

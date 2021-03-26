@@ -1,10 +1,10 @@
 import React from "react";
-import {Dimensions, Image, StatusBar, View} from "react-native";
-import Button from '../../components/Button'
+import {Dimensions, Image, StatusBar} from "react-native";
+import {BorderlessButton} from "react-native-gesture-handler";
 
+import Button from '../../components/Button'
 import {Box, Text, useTheme} from "../../components/Theme";
 import {AuthenticationRoutes, StackNavigatorProps} from "../../components/Navigation";
-import {BorderlessButton} from "react-native-gesture-handler";
 
 const {width} = Dimensions.get('window');
 

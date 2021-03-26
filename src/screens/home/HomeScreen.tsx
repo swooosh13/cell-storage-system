@@ -1,12 +1,12 @@
 import React from 'react';
 import {Box, Text} from "../../components/Theme";
 
-const AboutScreen = () => {
+const HomeScreen = () => {
   return (
     <Box alignItems={"center"} justifyContent={"center"}>
-      <Text>Home Screen</Text>
+      <Text>HomeScreen</Text>
     </Box>
   )
 }
 
-export default AboutScreen;
+export default HomeScreen;

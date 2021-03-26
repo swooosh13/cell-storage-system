@@ -22,6 +22,7 @@ async function bootstrap () {
 
 export default function App() {
   const [isReady, setIsReady] = useState(false);
+
   if (!isReady) {
     return <AppLoading
       startAsync={bootstrap}

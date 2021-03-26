@@ -22,6 +22,14 @@ export type AppRoutes = {
 }
 
 export type HomeRoutes = {
-  FindScreen:  undefined;
-  AboutScreen: undefined;
+  HomeScreen:  undefined;
+  DashboardScreen: undefined;
+  HistoryScreen: undefined;
+  SettingScreen: undefined;
+}
+
+export type MainRoutes = {
+  MainScreen: undefined;
+  ItemScreen: undefined;
+  AddScreen: undefined;
 }

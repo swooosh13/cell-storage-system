@@ -1,10 +1,10 @@
-import React, {FC} from 'react'
-import {View} from "react-native";
+import React, {FC} from 'react';
 import {StackNavigationProp} from "@react-navigation/stack";
+import {Feather as Icon} from '@expo/vector-icons';
+
 import {AuthenticationRoutes} from "../../components/Navigation";
 import Container from "../../components/Container";
 import {Box, Text} from "../../components/Theme";
-import {Feather as Icon} from '@expo/vector-icons';
 import Button from "../../components/Button";
 import CloseButton from "../../components/CloseButton";
 
@@ -36,7 +36,6 @@ const ChangedPasswordScreen: FC<IChangedPasswordScreen> = ({navigation}) => {
           </Text>
 
         </Box>
-
           <Text variant={"title1"}
                 textAlign={"center"}
                 marginBottom={"m"}>
@@ -46,7 +45,6 @@ const ChangedPasswordScreen: FC<IChangedPasswordScreen> = ({navigation}) => {
                 textAlign={"center"}>
             We have sent a password recover{"\n"}instructions to your email
           </Text>
-
 
         <Button variant={"primary"} onPress={() => navigation.navigate('SplashScreen')}/>
       </Box>

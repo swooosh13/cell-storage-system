@@ -1,13 +1,14 @@
 import React, {FC} from 'react';
-
 import {StackNavigationProp} from "@react-navigation/stack";
+import {Linking} from "react-native";
+
+import * as Yup from "yup";
+import {useFormik} from "formik";
+
 import {AuthenticationRoutes} from "../../components/Navigation";
 import {Box, Text} from "../../components/Theme";
 import Footer from "../../components/Footer";
 import Container from "../../components/Container";
-import {Linking} from "react-native";
-import * as Yup from "yup";
-import {useFormik} from "formik";
 import {TextInput} from "../../components/TextInput";
 import Button from "../../components/Button";
 

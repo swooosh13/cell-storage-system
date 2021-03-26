@@ -1,9 +1,10 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {authTypes} from "../types";
-import {auth} from "../reducers/auth";
+import {AppDispatch} from "../store";
 
-// TODO
-export const login = (foundUser: any) => async (dispatch: any) => {
+export type User = {email: string; userToken: string};
+
+export const login = (foundUser: User) => async (dispatch: AppDispatch) => {
   const userToken = JSON.stringify(foundUser.userToken);
   const userEmail = foundUser.email;
 
@@ -16,7 +17,7 @@ export const login = (foundUser: any) => async (dispatch: any) => {
   dispatch({type: authTypes.LOGIN, email: userEmail, token: userToken});
 }
 
-export const logout = () => async (dispatch: any) => {
+export const logout = () => async (dispatch: AppDispatch) => {
   try {
     await AsyncStorage.removeItem('userToken');
   } catch (e) {
@@ -26,10 +27,7 @@ export const logout = () => async (dispatch: any) => {
   dispatch({type: authTypes.LOGOUT});
 }
 
-type User = {email: string; userToken: string};
-
-// TODO - dispatch
-export const register = (foundUser: User) => async (dispatch: any) => {
+export const register = (foundUser: User) => async (dispatch: AppDispatch) => {
   const userToken = JSON.stringify(foundUser.userToken);
   const userEmail = foundUser.email;
 
@@ -42,7 +40,7 @@ export const register = (foundUser: User) => async (dispatch: any) => {
   dispatch({type: authTypes.REGISTER, email: userEmail, token: userToken});
 }
 
-export const retreiveToken = () => async (dispatch: any) => {
+export const retreiveToken = () => async (dispatch: AppDispatch) => {
   let userToken = null;
 
   try {

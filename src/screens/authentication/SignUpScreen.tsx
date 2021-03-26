@@ -1,19 +1,15 @@
 import React, {useRef} from "react";
-import {AuthenticationRoutes, StackNavigatorProps} from "../../components/Navigation";
 import {Linking, TextInput as RNTextInput} from "react-native";
 
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 
-
+import {AuthenticationRoutes, StackNavigatorProps} from "../../components/Navigation";
 import Container from '../../components/Container';
-
 import Button from "../../components/Button";
-import {Box, Text} from "../../components/Theme";
-
-import {TextInput} from "../../components/TextInput";
-
 import Footer from "../../components/Footer";
+import {Box, Text} from "../../components/Theme";
+import {TextInput} from "../../components/TextInput";
 
 const SignUpSchema = Yup.object().shape({
   password: Yup.string()

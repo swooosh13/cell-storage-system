@@ -1,19 +1,19 @@
-import React, {FC, useRef} from "react";
-import {AuthenticationRoutes, StackNavigatorProps} from "../../components/Navigation";
+import React, {useRef} from "react";
 import {TextInput as RNTextInput} from "react-native";
+import {RectButton} from "react-native-gesture-handler";
+import {useDispatch} from "react-redux";
 
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 
+import {AuthenticationRoutes, StackNavigatorProps} from "../../components/Navigation";
 import Container from '../../components/Container';
 import Button from "../../components/Button";
 import {Box, Text} from "../../components/Theme";
-
 import {TextInput} from "../../components/TextInput";
 import {Checkbox} from "../../components/CheckBox";
 import Footer from "../../components/Footer";
-import {BorderlessButton} from "react-native-gesture-handler";
-import {useDispatch} from "react-redux";
+
 import {login} from "../../redux/actions/authActions";
 
 const SignInSchema = Yup.object().shape({
@@ -50,6 +50,7 @@ const SignInScreen = ({navigation}: StackNavigatorProps<AuthenticationRoutes, "S
     validationSchema: SignInSchema,
     onSubmit: (values) => {
       console.log(values);
+      // TODO firebase authentication check
       dispatch(login({email: values.email, userToken: values.email + Date.now().toString()}));
     }
   });
@@ -96,7 +97,7 @@ const SignInScreen = ({navigation}: StackNavigatorProps<AuthenticationRoutes, "S
                      onSubmitEditing={() => handleSubmit()}
           />
 
-          <Box marginVertical={"s"}
+          <Box marginVertical={"m"}
                flexDirection={"row"}
                alignItems={"center"}
                justifyContent={"space-between"}>
@@ -104,9 +105,9 @@ const SignInScreen = ({navigation}: StackNavigatorProps<AuthenticationRoutes, "S
                       checked={values.remember}
                       onChange={() => setFieldValue("remember", !values.remember)}/>
 
-            <BorderlessButton onPress={() => navigation.navigate('ForgotPasswordScreen')}>
+            <RectButton onPress={() => navigation.navigate('ForgotPasswordScreen')}>
               <Text variant={"button"} color={"primary"}> Forgot password?</Text>
-            </BorderlessButton>
+            </RectButton>
           </Box>
 
           <Box alignItems={"center"} marginTop={"xl"}>

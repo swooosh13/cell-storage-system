@@ -6,7 +6,7 @@ import {Theme} from "./Theme";
 
 const styles = StyleSheet.create({
   container: {
-    borderRadius: 25,
+    borderRadius: 15,
     height: 50,
     width: 245,
     justifyContent: 'center',

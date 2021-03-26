@@ -4,7 +4,7 @@ import {createBox, createText, createTheme, useTheme as useReTheme} from "@shopi
 
 export const theme  = createTheme( {
   colors: {
-    primary: '#5294f1',
+    primary: '#032ca6',
     secondary: "#0C0D34",
     body: 'white',
     title: '#0C0D34',
@@ -14,6 +14,7 @@ export const theme  = createTheme( {
     button: '#0C0D34',
     red: 'red',
     darkGrey: '#8A8D90',
+    greyLight: '#f2f2f2',
     danger: '#FF0058',
     success: '#33cd63',
     primaryLight: '#e6f7f9',
