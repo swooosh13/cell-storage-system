@@ -28,7 +28,8 @@ const AppMainNavigationContainer: FC = () => {
         <ThemeProvider {...{theme}}>
           <Provider store={store}>
             <PersistGate persistor={persistor} loading={null}>
-              <StatusBar hidden />
+              <StatusBar barStyle={"dark-content"}
+                         backgroundColor={"white"} />
               <MainNavigationContainer/>
             </PersistGate>
           </Provider>

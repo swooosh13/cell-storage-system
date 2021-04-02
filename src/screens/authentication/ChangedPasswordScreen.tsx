@@ -46,8 +46,12 @@ const ChangedPasswordScreen: FC<IChangedPasswordScreen> = ({navigation}) => {
             We have sent a password recover{"\n"}instructions to your email
           </Text>
 
-        <Button variant={"primary"} onPress={() => navigation.navigate('SplashScreen')}/>
-      </Box>
+        <Box marginTop={"xl"}>
+          <Button variant={"primary"}
+                  label={"back to main"} onPress={() => navigation.navigate('SplashScreen')}/>
+
+        </Box>
+       </Box>
     </Container>
   )
 }

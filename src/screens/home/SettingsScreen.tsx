@@ -1,7 +1,7 @@
 import React from 'react';
 import {Box, Text} from "../../components/Theme";
 import {useDispatch} from "react-redux";
-import {logout} from "../../redux/actions/authActions";
+import {logout} from "../../redux/reducers/auth-reducer/authActions";
 import Button from "../../components/Button";
 
 const SettingsScreen = () => {

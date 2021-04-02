@@ -23,7 +23,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.artblck17.cell_storage_system"
     },
     "web": {
       "favicon": "./assets/favicon.png"

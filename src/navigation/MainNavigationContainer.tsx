@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {NavigationContainer} from "@react-navigation/native";
-import {retreiveToken} from "../redux/actions/authActions";
+import {retreiveToken} from "../redux/reducers/auth-reducer/authActions";
 
 import {ActivityIndicator, View} from "react-native";
 import AuthenticationNavigator from "./AuthenticationNavigator";

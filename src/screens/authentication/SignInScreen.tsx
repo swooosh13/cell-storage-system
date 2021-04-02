@@ -14,7 +14,7 @@ import {TextInput} from "../../components/TextInput";
 import {Checkbox} from "../../components/CheckBox";
 import Footer from "../../components/Footer";
 
-import {login} from "../../redux/actions/authActions";
+import {login} from "../../redux/reducers/auth-reducer/authActions";
 
 const SignInSchema = Yup.object().shape({
   password: Yup.string()

@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {authTypes} from "../types";
-import {AppDispatch} from "../store";
+import {authTypes} from "../../types";
+import {AppDispatch} from "../../store";
 
 export type User = {email: string; userToken: string};
 

@@ -4,3 +4,9 @@ export enum authTypes {
   REGISTER = "REGISTER",
   RETREIVE_TOKEN = "RETREIVE_TOKEN"
 }
+
+export enum searchActionTypes {
+  TOGGLE_MODAL = "TOGGLE_MODAL",
+  CHANGE_SECTOR = "CHANGE_SECTOR",
+  CHANGE_SEARCH_TYPE = "CHANGE_SEARCH_TYPE"
+}
