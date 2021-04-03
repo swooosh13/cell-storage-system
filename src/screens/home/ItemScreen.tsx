@@ -1,10 +1,16 @@
 import React from 'react';
 import {Box, Text} from "../../components/Theme";
+import {MainRoutes, StackNavigatorProps} from "../../components/Navigation";
 
-const ItemScreen = () => {
+const ItemScreen = ({navigation, route}: StackNavigatorProps<MainRoutes,"ItemScreen">) => {
+
+  let {params} = route;
   return (
-    <Box alignItems={"center"} justifyContent={"center"}>
-      <Text>Item Screen</Text>
+    <Box alignItems={"flex-start"} marginLeft={"l"} justifyContent={"center"}>
+      <Text>{params.name}</Text>
+      <Text>{params.description}</Text>
+      <Text>{params.position}</Text>
+      <Text>{params.sector}</Text>
     </Box>
   )
 }

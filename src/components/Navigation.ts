@@ -1,5 +1,6 @@
 import {ParamListBase, RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from "@react-navigation/stack";
+import {ItemType} from "../redux/reducers/items-reducer/items";
 
 export interface StackNavigatorProps<
   ParamList extends ParamListBase,
@@ -30,6 +31,6 @@ export type HomeRoutes = {
 
 export type MainRoutes = {
   MainScreen: undefined;
-  ItemScreen: undefined;
+  ItemScreen: ItemType;
   AddScreen: undefined;
 }

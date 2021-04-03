@@ -86,6 +86,7 @@ const SignInScreen = ({navigation}: StackNavigatorProps<AuthenticationRoutes, "S
           </Box>
 
           <TextInput icon={"lock"}
+                     ref={password}
                      onChangeText={handleChange("password")}
                      onBlur={handleBlur("password")}
                      placeholder={"Enter your password"}

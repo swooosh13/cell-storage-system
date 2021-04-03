@@ -32,8 +32,7 @@ export enum ItemsActionTypes {
   DELETE_ITEM = "DELETE_ITEM",
   UPDATE_UTEM = "UPDATE_UTEM",
   CLEAR_ITEMS = "CLEAR_ITEMS",
-  TOGGLE_SHOW_MODAL = "TOGGLE_SHOW_MODAL",
-  UPDATE_SEARCH = "UPDATE_SEARCH"
+  TOGGLE_SHOW_MODAL = "TOGGLE_SHOW_MODAL"
 }
 
 let itemsReducer = (state = initialState, action: AnyAction) => {
@@ -87,21 +86,35 @@ export const getItemById = (val: number) => async (dispatch: AppDispatch) => {
   dispatch({type: ItemsActionTypes.FETCH_ITEMS, items: response});
 };
 
+export const addItem = (item: ItemType) => async (dispatch: AppDispatch) => {
+  let response;
+  try {
+    response = await itemsAPI.postItem(item);
+  } catch (e) {
+    console.log(e);
+    console.log(response);
+    return;
+  } finally {
+    console.log("item", item);
+  }
+  dispatch({type: ItemsActionTypes.ADD_ITEM, item});
+}
+
 export const loadItems = (val: string) => async (dispatch: AppDispatch) => {
     let response;
 
-    console.log(val);
     try {
       if (val === "") {
+        console.log("loadItems(): byAll");
         response = await itemsAPI
           .getItems()
           .then((response: any) => response.data);
       } else {
+        console.log("loadItems(): byName");
         response = await itemsAPI.getItemsByName(val).then((response: any) => response.data);
       }
 
-    } catch
-      (e) {
+    } catch (e) {
       console.log(e);
       return;
     }

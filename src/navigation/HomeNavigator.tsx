@@ -1,6 +1,6 @@
 import React from "react";
 
-import HomeScreen from "../screens/home/HomeScreen";
+import MainScreen from "../screens/home/MainScreen";
 import {HomeRoutes, MainRoutes} from "../components/Navigation";
 import {createMaterialBottomTabNavigator} from "@react-navigation/material-bottom-tabs";
 import DashboardScreen from "../screens/home/DashboardScreen";
@@ -14,12 +14,13 @@ import ItemScreen from "../screens/home/ItemScreen";
 import AddScreen from "../screens/home/AddScreen";
 
 const Tab = createMaterialBottomTabNavigator<HomeRoutes>();
+
 const Stack = createStackNavigator<MainRoutes>();
 
 const MainNavigator = () => {
   return (
     <Stack.Navigator headerMode={"none"}>
-      <Stack.Screen name={"MainScreen"} component={HomeScreen}/>
+      <Stack.Screen name={"MainScreen"} component={MainScreen}/>
       <Stack.Screen name={"ItemScreen"} component={ItemScreen}/>
       <Stack.Screen name={"AddScreen"} component={AddScreen}/>
     </Stack.Navigator>
