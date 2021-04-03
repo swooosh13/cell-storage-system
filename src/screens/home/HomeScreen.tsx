@@ -5,60 +5,31 @@ import {FlatList, SafeAreaView, View} from "react-native";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../redux/store";
 import {IItems, loadItems} from "../../redux/reducers/items-reducer/items";
+import Item from "./Items/Item";
 
 const HomeScreen = () => {
   const items = useSelector((state: RootState) => state.items);
-  // @ts-ignore TODO
   const allItems: IItems = items.allItems;
+
+  let [searchText, setSearchText] = useState<string>("");
   const dispatch = useDispatch();
 
-  const [search, setSearch] = useState<string>("");
-
   useEffect(() => {
-    dispatch(loadItems());
-  }, [items, dispatch]);
-
-  const updateSearch = (search: string) => {
-    const searchText = search.toLowerCase();
-    setSearch(searchText);
-  }
-
-  useEffect(() => {
-    // dispatch
-    console.log(search)
-  }, [search])
+    dispatch(loadItems(searchText));
+  }, [searchText, dispatch]);
 
   return (
     <SafeAreaView>
       {/* @ts-ignore */}
       <SearchBar lightTheme={"platform"}
                  round
-                 value={search}
-                 onChangeText={updateSearch}/>
-      <FlatList data={allItems} keyExtractor={(item) => {
-        return item.id.toString()
-      }} renderItem={({item}) => (
-        <Box marginBottom={"l"}
-             backgroundColor={"grey"}
-             flex={1}
-             alignContent={"center"}
-             justifyContent={"center"}>
-          <Box>
-            <Text>{item.description}</Text>
-          </Box>
-          <Box>
-            <Text>{item.name}</Text>
-          </Box>
-
-          <Box>
-            <Text>{item.position}</Text>
-          </Box>
-
-          <Box>
-            <Text>{item.sector}</Text>
-          </Box>
-        </Box>
-      )}/>
+                 value={searchText}
+                 onChangeText={setSearchText}/>
+      <FlatList data={allItems}
+                keyExtractor={(item) => {
+                  return item.id.toString()
+                }} renderItem={({item}) =>
+        (<Item item={item}/>)}/>
 
 
     </SafeAreaView>

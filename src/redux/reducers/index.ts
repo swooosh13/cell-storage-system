@@ -10,7 +10,12 @@ const persistConfig = {
   whitelist: ['isLoading', 'userEmail', 'userToken']
 }
 
-const rootReducer = combineReducers({
+interface IRootReducer {
+  auth: any;
+  items: any;
+}
+
+const rootReducer = combineReducers<IRootReducer>({
   auth: persistReducer(persistConfig, auth),
   items: itemsReducer
 })

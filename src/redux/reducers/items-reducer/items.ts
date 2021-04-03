@@ -1,6 +1,7 @@
-import { AnyAction } from "redux";
-import {AppDispatch} from "../../store";
+import {AnyAction} from "redux";
+import {AppDispatch, store} from "../../store";
 import {itemsAPI} from "../../api/api";
+import {useDispatch} from "react-redux";
 
 export type ItemType = {
   id: number;
@@ -10,7 +11,8 @@ export type ItemType = {
   position: string;
 };
 
-export interface IItems extends Array<ItemType> {}
+export interface IItems extends Array<ItemType> {
+}
 
 export interface IItemsReducer {
   allItems: IItems;
@@ -21,7 +23,7 @@ export interface IItemsReducer {
 let initialState: IItemsReducer = {
   allItems: [],
   isFetching: false,
-  showAddModal: false
+  showAddModal: false,
 };
 
 export enum ItemsActionTypes {
@@ -30,7 +32,8 @@ export enum ItemsActionTypes {
   DELETE_ITEM = "DELETE_ITEM",
   UPDATE_UTEM = "UPDATE_UTEM",
   CLEAR_ITEMS = "CLEAR_ITEMS",
-  TOGGLE_SHOW_MODAL = "TOGGLE_SHOW_MODAL"
+  TOGGLE_SHOW_MODAL = "TOGGLE_SHOW_MODAL",
+  UPDATE_SEARCH = "UPDATE_SEARCH"
 }
 
 let itemsReducer = (state = initialState, action: AnyAction) => {
@@ -79,24 +82,33 @@ let itemsReducer = (state = initialState, action: AnyAction) => {
 
 export const getItemById = (val: number) => async (dispatch: AppDispatch) => {
   let response = await itemsAPI
-    .getItem(val)
+    .getItemById(val)
     .then((response: any) => response.data);
-  dispatch({ type: ItemsActionTypes.FETCH_ITEMS, items: response });
+  dispatch({type: ItemsActionTypes.FETCH_ITEMS, items: response});
 };
 
-export const loadItems = () => async (dispatch: AppDispatch) => {
-  let response;
-  try {
-    response = await itemsAPI
-      .getItems()
-      .then((response: any) => response.data);
-  } catch (e) {
-    console.log(e);
-    return;
+export const loadItems = (val: string) => async (dispatch: AppDispatch) => {
+    let response;
+
+    console.log(val);
+    try {
+      if (val === "") {
+        response = await itemsAPI
+          .getItems()
+          .then((response: any) => response.data);
+      } else {
+        response = await itemsAPI.getItemsByName(val).then((response: any) => response.data);
+      }
+
+    } catch
+      (e) {
+      console.log(e);
+      return;
+    }
+
+    dispatch({type: ItemsActionTypes.FETCH_ITEMS, items: response});
   }
-
-  dispatch({ type: ItemsActionTypes.FETCH_ITEMS, items: response });
-};
+;
 
 export const clearItems = () => (dispatch: AppDispatch) => {
   dispatch({type: ItemsActionTypes.CLEAR_ITEMS});

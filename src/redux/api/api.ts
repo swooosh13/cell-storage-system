@@ -9,11 +9,14 @@ const instance = axios.create({
 });
 
 export const itemsAPI = {
-  getItem(id: number): any {
+  getItemById(id: number): any {
     return instance.get(`items?id=${id}`);
   },
   getItems(): any {
     return instance.get(`items`);
+  },
+  getItemsByName(name: string): any {
+    return instance.get(`items?name=${name}`);
   },
   removeItem(id: number): any {
     return instance.delete(`items/${id}`);
