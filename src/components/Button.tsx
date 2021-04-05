@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
   }
 })
 
+
 interface IButton {
   variant?: "default" | "primary";
   label?: string;

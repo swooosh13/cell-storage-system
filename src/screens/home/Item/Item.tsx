@@ -1,8 +1,10 @@
 import React, {FC} from "react";
 import {Box, Text} from "../../../components/Theme";
-import {ItemType, removeItem} from "../../../redux/reducers/items-reducer/items";
+import {removeItem} from "../../../redux/reducers/items-reducer/itemsActions";
 import {Alert, TouchableOpacity} from "react-native";
 import {useDispatch} from "react-redux";
+
+import {ItemType} from "../../../redux/reducers/items-reducer/items";
 
 interface IItemProps {
   item: ItemType;

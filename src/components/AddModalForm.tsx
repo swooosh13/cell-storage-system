@@ -1,16 +1,14 @@
 import React, {useRef, useState} from 'react';
-import {Modal, SafeAreaView, Button as RNButton, TextInput, StyleSheet, TouchableOpacity} from "react-native";
-import {addItem, toggleAddModal} from "../redux/reducers/items-reducer/items";
+import {Modal, TextInput, StyleSheet, TouchableOpacity} from "react-native";
+import {addItem, toggleAddModal} from "../redux/reducers/items-reducer/itemsActions";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../redux/store";
 
 import {Box, Text} from './Theme';
 import {useFormik} from "formik";
 import {RadioButton} from 'react-native-paper';
-import Button from "./Button";
+
 import * as Yup from "yup";
-import {RectButton} from "react-native-gesture-handler";
-import {backgroundColor} from "@shopify/restyle";
 
 const ModalSchema = Yup.object().shape({
   name: Yup.string()
@@ -31,7 +29,6 @@ const AddModalForm = () => {
   const dispatch = useDispatch();
   let visible: boolean = useSelector((state: RootState) => state.items.showAddModal);
   const [checked, setChecked] = useState<string>('first');
-
 
   const description = useRef<TextInput>(null);
   const position = useRef<TextInput>(null);
@@ -138,12 +135,10 @@ const AddModalForm = () => {
           </TouchableOpacity>
         </Box>
 
-
       </Box>
-
     </Modal>
   )
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -161,4 +156,5 @@ const styles = StyleSheet.create({
     color: "white"
   }
 })
+
 export default AddModalForm;

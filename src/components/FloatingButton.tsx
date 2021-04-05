@@ -1,0 +1,127 @@
+import React, {useState} from 'react';
+import {View, StyleSheet, Animated, TouchableWithoutFeedback} from "react-native";
+
+import {AntDesign} from "@expo/vector-icons";
+import {connect} from "react-redux";
+import {theme} from "./Theme";
+import {TouchableOpacity} from "react-native-gesture-handler";
+
+class FloatingButton extends React.Component<any, any> {
+
+  animation = new Animated.Value(0);
+
+  toggleMenu = () => {
+    // @ts-ignore
+    const toValue = this.open ? 0 : 1;
+
+    // @ts-ignore
+    Animated.spring(this.animation, {
+      toValue,
+      friction: 5,
+      useNativeDriver: false
+    }).start();
+
+    // @ts-ignore
+    this.open = !this.open;
+  }
+
+  render() {
+    const addstyle = {
+      transform: [
+        {scale: this.animation},
+        {translateY: this.animation.interpolate({
+            inputRange: [0,1],
+            outputRange: [0, -70]
+          })}
+      ]
+    }
+
+    const filterstyle = {
+      transform: [
+        {scale: this.animation},
+        {translateY: this.animation.interpolate({
+            inputRange: [0,1],
+            outputRange: [0, -130]
+          })}
+      ]
+    }
+
+    const rotation = {
+      transform: [{
+        rotate: this.animation.interpolate({
+          inputRange: [0, 1],
+          outputRange: ["0deg", "180deg"]
+        })
+      }]
+    }
+
+    const opactity = this.animation.interpolate({
+      inputRange: [0, 0.5, 1],
+      outputRange: [0, 0, 1]
+    })
+    return (
+      <View style={[styles.container, this.props.style]}>
+
+        <TouchableWithoutFeedback>
+          <Animated.View style={[styles.button, styles.secondary, filterstyle]}>
+            <TouchableOpacity>
+              <AntDesign name={"swap"} size={24} color={"black"}/>
+            </TouchableOpacity>
+            </Animated.View>
+        </TouchableWithoutFeedback>
+
+        <TouchableWithoutFeedback onPress={() => this.props.openAdd()}>
+          <Animated.View style={[styles.button, styles.secondary, addstyle, opactity]}>
+            <TouchableOpacity>
+              <AntDesign name={"plus"} size={24} color={"black"}/>
+            </TouchableOpacity>
+          </Animated.View>
+        </TouchableWithoutFeedback>
+
+
+        <TouchableWithoutFeedback onPress={this.toggleMenu}>
+            <Animated.View style={[styles.button, styles.menu, rotation, opactity]}>
+              <TouchableOpacity>
+                <AntDesign name={"arrowup"} size={24} color={"#fff"}/>
+              </TouchableOpacity>
+               </Animated.View>
+        </TouchableWithoutFeedback>
+      </View>
+    )
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+    position: "absolute"
+  },
+  button: {
+    position: "absolute",
+    width: 60,
+    height: 60,
+    borderRadius: 60 / 2,
+    alignItems: "center",
+    justifyContent: "center",
+
+    shadowRadius: 10,
+    shadowColor: "#F02A4B",
+    shadowOpacity: 0.3,
+    shadowOffset: {
+      height: 2,
+      width: 2
+    },
+    elevation: 7
+  },
+  menu: {
+    backgroundColor: theme.colors.primary_analogue
+  },
+  secondary: {
+    width: 48,
+    height: 48,
+    borderRadius: 48 / 2,
+    backgroundColor: "#fff",
+  }
+})
+
+export default FloatingButton;

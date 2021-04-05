@@ -2,15 +2,18 @@ import React, {useEffect, useState} from 'react';
 import {SearchBar} from "react-native-elements";
 import {Dimensions, FlatList, SafeAreaView, StyleSheet, Modal} from "react-native";
 import {useDispatch, useSelector} from "react-redux";
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 import {RootState} from "../../redux/store";
-import {IItems, ItemType, loadItems, toggleAddModal} from "../../redux/reducers/items-reducer/items";
+import {loadItems, toggleAddModal} from "../../redux/reducers/items-reducer/itemsActions";
+import {IItems, ItemType} from '../../redux/reducers/items-reducer/items'
+
 import Item from "./Item/Item";
 import {MainRoutes, StackNavigatorProps} from "../../components/Navigation";
 import {Feather} from '@expo/vector-icons';
 import {Box, theme, useTheme} from "../../components/Theme";
 import AddModalForm from "../../components/AddModalForm";
+import FloatingButton from "../../components/FloatingButton";
 
 
 const {width, height} = Dimensions.get("screen");
@@ -23,20 +26,17 @@ const MainScreen = ({navigation}: StackNavigatorProps<MainRoutes, "MainScreen">)
 
   const allItems: IItems = items.allItems;
 
-
   const goToItemScreen = (item: ItemType) => {
     navigation.navigate('ItemScreen', item);
-  }
-
-  const handleOpenModal = () => {
-
   }
 
   useEffect(() => {
     dispatch(loadItems(searchText));
   }, [searchText, dispatch]);
 
-
+  const openAddCallback = () => {
+    dispatch(toggleAddModal());
+  }
   return (
     /*TODO margin bottom to adaptive*/
     <SafeAreaView style={{marginBottom: height * 0.1}}>
@@ -58,20 +58,8 @@ const MainScreen = ({navigation}: StackNavigatorProps<MainRoutes, "MainScreen">)
                 }} renderItem={({item}) =>
         (<Item item={item} goToItem={goToItemScreen}/>)}/>
 
-
-
-
-        <Box style={styles.addButton}>
-          <TouchableOpacity
-            activeOpacity={0.1}
-            // TODO
-            onPress={() => dispatch(toggleAddModal())}>
-            <Box>
-              <Feather name="plus"  size={30} color="white"/>
-            </Box>
-
-        </TouchableOpacity>
-        </Box>
+      <FloatingButton openAdd={openAddCallback}
+                      style={{top: width * 1.3 , left: height * 0.5}}/>
 
       <AddModalForm/>
     </SafeAreaView>
