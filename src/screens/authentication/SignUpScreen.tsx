@@ -51,7 +51,7 @@ const SignUpScreen = ({navigation}: StackNavigatorProps<AuthenticationRoutes, "S
 
   return (
     <Container {...{footer}} >
-      <Box padding={"l"} marginBottom={"l"}>
+      <Box padding={"l"} marginTop={"xl"} marginBottom={"l"}>
         <Text variant={"title1"}
               textAlign={"center"}
               marginBottom={"m"}>

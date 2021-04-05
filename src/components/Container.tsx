@@ -1,7 +1,6 @@
 import React, {FC, ReactNode} from 'react';
-import {Dimensions, StyleSheet, Platform} from "react-native";
-import {Box, Theme, useTheme} from "./Theme";
-import {LinearGradient} from "expo-linear-gradient";
+import {Dimensions, Platform} from "react-native";
+import {Box, useTheme} from "./Theme";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
 import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 import Constants from "expo-constants";
@@ -25,34 +24,9 @@ const Container: FC<IContainerProps> = ({children, footer}) => {
     <KeyboardAwareScrollView scrollEnabled={false}>
       <Box height={wHeight + (Platform.OS === 'android' ? Constants.statusBarHeight : 0)} backgroundColor={"greyLight"}>
 
-        <Box backgroundColor={"white"}>
-          <Box borderBottomLeftRadius={"xl"}
-               overflow="hidden"
-               height={height * 0.3}>
-            <LinearGradient colors={['#1f4ca6', '#032ca6']}
-                            start={{x: 1, y: 0}}
-                            end={{x: 0, y: 0}}
-                            style={{
-                              width,
-                              height,
-                              borderBottomLeftRadius: theme.borderRadii.xl
-                            }}
-            />
-          </Box>
-        </Box>
-        <Box flex={1} overflow={"hidden"}>
-          <LinearGradient colors={['#1f4ca6' , '#032ca6']}
-                          start={{x: 1, y: 0}}
-                          end={{x: 0, y: 0}}
-                          style={{
-                            ...StyleSheet.absoluteFillObject,
-                            width,
-                            height,
-                            top: -height * 0.4
-                          }}
-          />
+        <Box style={{marginTop: height / 3}} flex={1} overflow={"hidden"}>
           <Box backgroundColor={"white"}
-               borderTopLeftRadius={0}
+               borderTopLeftRadius={"xl"}
                borderRadius={"xl"}
                flex={1}>
             <KeyboardAwareScrollView>

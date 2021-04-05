@@ -58,6 +58,7 @@ const SignInScreen = ({navigation}: StackNavigatorProps<AuthenticationRoutes, "S
   return (
     <Container {...{footer}} >
       <Box padding={"l"} marginBottom={"l"}
+           marginTop={"xl"}
            alignItems={"stretch"} justifyContent={"center"}>
 
         <Text variant={"title1"}
