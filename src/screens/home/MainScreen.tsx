@@ -29,7 +29,11 @@ const MainScreen = ({navigation}: StackNavigatorProps<MainRoutes, "MainScreen">)
   }
 
   useEffect(() => {
-    dispatch(loadItems(searchText));
+    // сделать нормально TODO
+    let str = ["", ""];
+    str = searchText.split(" ");
+
+    dispatch(loadItems(str[0], str[1]));
   }, [searchText, dispatch]);
 
   const openAddCallback = () => {

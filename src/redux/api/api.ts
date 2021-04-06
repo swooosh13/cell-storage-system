@@ -1,11 +1,9 @@
-// TODO
-
 import axios, { AxiosResponse } from "axios";
 import { IItems, ItemType } from "../reducers/items-reducer/items";
 
 const instance = axios.create({
   withCredentials: true,
-  baseURL: "https://infinite-mountain-18881.herokuapp.com/",
+  baseURL: "https://infinite-mountain-18881.herokuapp.com/"
 });
 
 export const itemsAPI = {
@@ -17,6 +15,9 @@ export const itemsAPI = {
   },
   getItemsByName(name: string): any {
     return instance.get(`items?name=${name}`);
+  },
+  getItemsByNameAndDescription(name:string, description: string): any {
+    return instance.get(`items?name=${name}&description=${description}`)
   },
   removeItem(id: number): any {
     return instance.delete(`items/${id}`);

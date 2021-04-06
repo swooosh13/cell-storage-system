@@ -24,9 +24,10 @@ interface IButton {
   variant?: "default" | "primary";
   label?: string;
   onPress?: () => void;
+  style?: any
 }
 
-const Button: FC<IButton> = ({variant, label, onPress, children}) => {
+const Button: FC<IButton> = ({variant, label, onPress, children, style}) => {
   const theme = useTheme<Theme>();
 
   const backgroundColor = variant === "primary"
@@ -35,7 +36,7 @@ const Button: FC<IButton> = ({variant, label, onPress, children}) => {
   const color = variant === "primary" ? theme.colors.white : theme.colors.secondary;
 
   return (
-    <RectButton style={[styles.container, {backgroundColor}]} {...{onPress}}>
+    <RectButton style={[styles.container, {backgroundColor}, {...style}]} {...{onPress}}>
       <Text style={[styles.label, {color}]}>{label}</Text>
     </RectButton>
   )

@@ -6,7 +6,6 @@ import {ActivityIndicator, View} from "react-native";
 import AuthenticationNavigator from "./AuthenticationNavigator";
 import HomeNavigator from "./HomeNavigator";
 
-import {useAppDispatch, useAppSelector} from "../redux/hooks";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../redux/store";
 

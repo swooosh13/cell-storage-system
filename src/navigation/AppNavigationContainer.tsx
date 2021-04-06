@@ -1,5 +1,4 @@
 import React, {FC} from 'react';
-
 import {SafeAreaProvider} from 'react-native-safe-area-context'
 import {ThemeProvider} from "@shopify/restyle";
 
@@ -11,18 +10,8 @@ import {store, persistor} from '../redux/store';
 import MainNavigationContainer from "./MainNavigationContainer";
 import {StatusBar} from "react-native";
 
-const fonts = {
-  "SFProDisplay-Bold": require("../../assets/fonts/SFProDisplay-Bold.ttf"),
-  "SFProDisplay-Semibold": require("../../assets/fonts/SFProDisplay-Semibold.ttf"),
-  "SFProDisplay-Regular": require("../../assets/fonts/SFProDisplay-Regular.ttf"),
-  "SFProDisplay-Medium": require('../../assets/fonts/SFProDisplay-Medium.ttf'),
-  "SFProDisplay-Heavy": require("../../assets/fonts/SFProDisplay-Heavy.ttf"),
-  "SFProDisplay-Light": require("../../assets/fonts/SFProDisplay-Light.ttf"),
-};
-
 const AppMainNavigationContainer: FC = () => {
   // TODO useEffect firebase auth
-
   return (
     <SafeAreaProvider>
         <ThemeProvider {...{theme}}>

@@ -18,7 +18,7 @@ const SettingsScreen = () => {
          justifyContent={"flex-end"}>
       <Box flex={1} justifyContent={"center"}>
         <Box>
-          <Text>HomeScreen</Text>
+          <Text>Settings screen</Text>
         </Box>
 
       </Box>

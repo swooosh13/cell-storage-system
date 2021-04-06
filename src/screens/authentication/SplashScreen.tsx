@@ -9,10 +9,17 @@ import {AuthenticationRoutes, StackNavigatorProps} from "../../components/Naviga
 const {width} = Dimensions.get('window');
 
 const picture = {
-  src: require('../../../assets/splash.png'),
-  width: 1800,
-  height: 1024
+  src: require('../../../assets/tech_signin.png'),
+  width: 800,
+  height: 500
 }
+
+//
+// const picture = {
+//   src: require('../../../assets/tech_signin.png'),
+//   width: 1800,
+//   height: 1024
+// }
 
 export const assets = [picture.src];
 
@@ -30,7 +37,7 @@ const SplashScreen = ({navigation}: StackNavigatorProps<AuthenticationRoutes, "S
 
         <Image source={picture.src}
                style={{
-                 marginBottom: 10,
+                 marginBottom: 30,
                  width: width - theme.borderRadii.xl,
                  height: ((width - theme.borderRadii.xl) * picture.height) / picture.width
                }}/>
@@ -53,7 +60,7 @@ const SplashScreen = ({navigation}: StackNavigatorProps<AuthenticationRoutes, "S
             Let`s get Started
           </Text>
           <Text variant={"body"} textAlign={"center"}>
-            Sign In. If you `r not sign in just sign up right now bruuuuuuuuuuuh!
+            Sign In. If you`r not sign in just sign up!
           </Text>
           <Button label={"Have an account? Login"} variant={"primary"}
                   onPress={() => navigation.navigate('SignInScreen')}/>
