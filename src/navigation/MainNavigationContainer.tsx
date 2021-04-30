@@ -9,7 +9,6 @@ import HomeNavigator from "./HomeNavigator";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../redux/store";
 
-
 const MainNavigationContainer = () => {
   const dispatch = useDispatch();
 

@@ -30,13 +30,12 @@ export const loadItems = (val: string, description: string = "") => async (
 
   try {
     if (val === "") {
-      // TODO
-      console.log("loadItems() AC: getAll");
+      console.log("loadItems() AC: -getAll");
       response = await itemsAPI
         .getItems()
         .then((response: any) => response.data);
     } else if (description === "") {
-      console.log("loadItems() AC: searchByName");
+      console.log("loadItems() AC: -searchByName");
       response = await itemsAPI
         .getItemsByName(val)
         .then((response: any) => response.data);
