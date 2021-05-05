@@ -1,33 +1,47 @@
 import axios, { AxiosResponse } from "axios";
 import { IItems, ItemType } from "../reducers/items-reducer/items";
-import {API_URL, API_TOKEN} from "@env"
+import {API_ITEMS_KEY, API_ITEMS_URL, API_USERS_URL} from "@env";
 
-const instance = axios.create({
+const itemsInstance = axios.create({
   withCredentials: true,
-  baseURL: API_URL,
+  baseURL: API_ITEMS_URL,
   headers: {
-    "API_KEY": API_TOKEN
+    "API_KEY": API_ITEMS_KEY
   }
+});
+
+const usersInstance = axios.create({
+  withCredentials: true,
+  baseURL: API_USERS_URL
 });
 
 export const itemsAPI = {
   getItemById(id: number): any {
-    return instance.get(`items?id=${id}`);
+    return itemsInstance.get(`items?id=${id}`);
   },
   getItems(): any {
-    return instance.get(`items`);
+    return itemsInstance.get(`items`);
   },
   getItemsByName(name: string): any {
-    return instance.get(`items/searchName/${name}`);
+    return itemsInstance.get(`items/searchName/${name}`);
   },
   getItemsByNameAndDescription(name:string, description: string): any {
-    return instance.get(`items/searchItem/${name}/${description}`)
+    return itemsInstance.get(`items/searchItem/${name}/${description}`)
   },
   removeItem(id: number): any {
-    return instance.delete(`items/${id}`);
+    return itemsInstance.delete(`items/${id}`);
   },
   postItem(item: ItemType): any {
-    return instance.post('items/', {...item})
+    return itemsInstance.post('items/', {...item})
   },
   updateItems(id: number, item: ItemType): any {},
 };
+
+export const usersAPI = {
+  login(email: string, password: string): any {
+    return usersInstance.post('auth/login', {email, password});
+  },
+  register(email:string, password: string): any {
+    return usersInstance.post('auth/register', {email, password});
+  }
+ }

@@ -31,8 +31,6 @@ const Item: FC<IItemProps> = ({item, goToItem}) => {
   }
 
   const navigateHandler = () => {
-    // TODO
-    console.log('navigate to Item screen');
     goToItem(item);
   }
 

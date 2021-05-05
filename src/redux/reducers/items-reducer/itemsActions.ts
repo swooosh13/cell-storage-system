@@ -15,11 +15,9 @@ export const addItem = (item: ItemType) => async (dispatch: AppDispatch) => {
     response = await itemsAPI.postItem(item);
   } catch (e) {
     console.log(e);
-    console.log(response);
     return;
-  } finally {
-    console.log("item", item);
   }
+  
   dispatch({ type: ItemsActionTypes.ADD_ITEM, item });
 };
 

@@ -1,17 +1,17 @@
 import React from 'react';
-import {Box, Text, theme} from "../../components/Theme";
-import {Alert, Dimensions} from 'react-native'
-import {MainRoutes, StackNavigatorProps} from "../../components/Navigation";
-import {View} from 'react-native-animatable';
+import { Box, Text, theme } from "../../components/Theme";
+import { Alert, Dimensions, TouchableOpacity } from 'react-native'
+import { MainRoutes, StackNavigatorProps } from "../../components/Navigation";
+import { View } from 'react-native-animatable';
 import Button from "../../components/Button";
-import {removeItem} from "../../redux/reducers/items-reducer/itemsActions";
-import {useDispatch} from "react-redux";
+import { removeItem } from "../../redux/reducers/items-reducer/itemsActions";
+import { useDispatch } from "react-redux";
 
-const ItemScreen = ({navigation, route}: StackNavigatorProps<MainRoutes, "ItemScreen">) => {
+const ItemScreen = ({ navigation, route }: StackNavigatorProps<MainRoutes, "ItemScreen">) => {
   const dispatch = useDispatch();
 
-  let {params} = route;
-  const {width, height} = Dimensions.get('window');
+  let { params } = route;
+  const { width, height } = Dimensions.get('window');
 
   const removeItemHandler = () => {
     console.log('remove item Alert')
@@ -24,25 +24,27 @@ const ItemScreen = ({navigation, route}: StackNavigatorProps<MainRoutes, "ItemSc
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        {text: "Подтвердить", onPress: () => {
-          dispatch(removeItem(params.id))
+        {
+          text: "Подтвердить", onPress: () => {
+            dispatch(removeItem(params.id))
             navigation.popToTop();
-        }}
+          }
+        }
       ]
     );
   }
   return (
-    <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Box width={width * 0.90} height={height * 0.6} alignItems={"center"} backgroundColor={"grey"} borderRadius={"l"}
-           justifyContent={"center"}>
+        justifyContent={"center"}>
 
         <Box borderRadius={"s"}
-             backgroundColor="primary"
-             width={width * 0.7}
-             flexDirection={"row"}
-             padding={"s"}
-             alignContent={"space-between"}
-             justifyContent={"center"} alignItems={"center"}>
+          backgroundColor="primary"
+          width={width * 0.7}
+          flexDirection={"row"}
+          padding={"s"}
+          alignContent={"space-between"}
+          justifyContent={"center"} alignItems={"center"}>
 
           <Box>
             <Text color={"white"} variant={"title"}>{params.name}</Text>
@@ -61,10 +63,14 @@ const ItemScreen = ({navigation, route}: StackNavigatorProps<MainRoutes, "ItemSc
       </Box>
 
       <Box flexDirection={"row"} marginTop={"s"}>
-        {/*TODO убрать theme*/}
-        <Button onPress={removeItemHandler} variant={"primary"} label={"забрать"} style={{backgroundColor: theme.colors.danger, width: 100}}/>
-        <Button variant={"primary"} label={"добавить еще"}
-                style={{backgroundColor: theme.colors.success, marginLeft: 10}}/>
+        <TouchableOpacity activeOpacity={0.78}>
+          <Button onPress={removeItemHandler} variant={"primary"} label={"забрать"} style={{ backgroundColor: theme.colors.danger, width: 100 }} />
+        </TouchableOpacity>
+
+        <TouchableOpacity activeOpacity={0.78}>
+          <Button variant={"primary"} label={"переместить"}
+            style={{ backgroundColor: theme.colors.success, marginLeft: 10 }} />
+        </TouchableOpacity>
       </Box>
     </View>
   )
