@@ -55,11 +55,9 @@ let itemsReducer = (state = initialState, action: AnyAction) => {
     case ItemsActionTypes.UPDATE_UTEM:
       return {
         ...state,
-        allItems: state.allItems.filter((item) => {
-          if (item.id === action.id) {
-            item.name = action.name;
-            item.description = action.description;
-            item.position = action.position;
+        allItems: state.allItems.map((item) => {
+          if (item.id === action.item.id) {
+            item = action.item;
           }
           return item;
         }),

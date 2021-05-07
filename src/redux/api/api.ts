@@ -34,7 +34,9 @@ export const itemsAPI = {
   postItem(item: ItemType): any {
     return itemsInstance.post('items/', {...item})
   },
-  updateItems(id: number, item: ItemType): any {},
+  updateItem(id: number, item: ItemType): any {
+    return itemsInstance.put(`items/${id}`, item);
+  },
 };
 
 export const usersAPI = {

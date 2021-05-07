@@ -17,11 +17,23 @@ export const addItem = (item: ItemType) => async (dispatch: AppDispatch) => {
     console.log(e);
     return;
   }
-  
+
   dispatch({ type: ItemsActionTypes.ADD_ITEM, item });
 };
 
-export const loadItems = (val: string, description: string = "") => async (
+export const updateItem = (item: ItemType) => async (dispatch: AppDispatch) => {
+  let response;
+  try {
+    response = await itemsAPI.updateItem(item.id, item);
+  } catch (e) {
+    console.log(e);
+    return;
+  }
+
+  dispatch({ type: ItemsActionTypes.UPDATE_UTEM, item });
+};
+
+export const loadItems = (val: string = "", description: string = "") => async (
   dispatch: AppDispatch
 ) => {
   let response;

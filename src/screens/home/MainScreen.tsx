@@ -58,7 +58,6 @@ const MainScreen = ({navigation}: StackNavigatorProps<MainRoutes, "MainScreen">)
   }, [width, height]);
 
   return (
-    /*TODO margin bottom to adaptive*/
     <SafeAreaView style={{marginBottom: height * 0.1}}>
       {/*@ts-ignore*/}
       <SearchBar lightTheme={"platform"}

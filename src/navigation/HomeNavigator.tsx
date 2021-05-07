@@ -10,7 +10,7 @@ import {useTheme} from "@shopify/restyle";
 import {Theme} from "../components/Theme";
 import {Ionicons as Icon} from "@expo/vector-icons";
 import {createStackNavigator} from "@react-navigation/stack";
-import ItemScreen from "../screens/home/ItemScreen";
+import ItemScreen from "../screens/home/ItemScreen/ItemScreen";
 import AddScreen from "../screens/home/AddScreen";
 
 const Tab = createMaterialBottomTabNavigator<HomeRoutes>();

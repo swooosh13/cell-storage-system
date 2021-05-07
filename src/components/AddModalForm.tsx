@@ -41,7 +41,6 @@ const AddModalForm = () => {
     validationSchema: ModalSchema,
     onSubmit: (values) => {
       dispatch(addItem({...values, id: Math.floor(Math.random() * 1000000)}));
-
       dispatch(toggleAddModal());
     }
   });

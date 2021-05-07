@@ -34,6 +34,9 @@ const Item: FC<IItemProps> = ({item, goToItem}) => {
     goToItem(item);
   }
 
+  if (!item) {
+    return null;
+  }
   return (
     <TouchableOpacity
       onPress={navigateHandler}
