@@ -57,17 +57,17 @@ const SplashScreen = ({navigation}: StackNavigatorProps<AuthenticationRoutes, "S
              justifyContent={"space-evenly"}
              padding={"xl"}>
           <Text variant={"title2"}>
-            Let`s get Started
+            Давайте начнем
           </Text>
           <Text variant={"body"} textAlign={"center"}>
-            Sign In. If you`r not sign in just sign up!
+            Войдите. Если нет аккаунта, то зарегестрируйтесь!
           </Text>
-          <Button label={"Have an account? Login"} variant={"primary"}
+          <Button label={"Есть аккаунт? Авторизоваться"} variant={"primary"}
                   onPress={() => navigation.navigate('SignInScreen')}/>
-          <Button label={"Join us"} onPress={() => navigation.navigate('SignUpScreen')}/>
+          <Button label={"Зарегестрироваться"} onPress={() => navigation.navigate('SignUpScreen')}/>
 
           <BorderlessButton onPress={() => navigation.navigate('ForgotPasswordScreen')}>
-            <Text variant={"button"} color={"secondary"}>Forgot password ?</Text>
+            <Text variant={"button"} color={"secondary"}>Забыли пароль?</Text>
           </BorderlessButton>
 
         </Box>

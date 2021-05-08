@@ -37,6 +37,9 @@ export const itemsAPI = {
   updateItem(id: number, item: ItemType): any {
     return itemsInstance.put(`items/${id}`, item);
   },
+  getlastId():any {
+    return itemsInstance.get('items/lastid');
+  }
 };
 
 export const usersAPI = {

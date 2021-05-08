@@ -66,11 +66,11 @@ const Item: FC<IItemProps> = ({item, goToItem}) => {
           </Box>
 
           <Box>
-            <Text variant={"body"}>position: {item.position}</Text>
+            <Text variant={"body"}>позиция: {item.position}</Text>
           </Box>
 
           <Box>
-            <Text>sector: {item.sector}</Text>
+            <Text>сектор: {item.sector}</Text>
           </Box>
         </Box>
 

@@ -28,8 +28,8 @@ const SignUpSchema = Yup.object().shape({
 
 const SignUpScreen = ({ navigation }: StackNavigatorProps<AuthenticationRoutes, "SignUpScreen">) => {
 
-  const footer = (<Footer title={"Don`t work ? "}
-    action={"Try something else"}
+  const footer = (<Footer title={"Не работает? "}
+    action={"Попробуйте что-нибудь еще"}
     onPress={() => Linking.openURL("https://support.google.com/")} />);
 
 
@@ -82,19 +82,19 @@ const SignUpScreen = ({ navigation }: StackNavigatorProps<AuthenticationRoutes, 
         <Text variant={"title1"}
           textAlign={"center"}
           marginBottom={"m"}>
-          Sign Up
+          Зарегестрироваться
         </Text>
         <Text variant={"body"}
           textAlign={"center"}
           marginBottom={"l"}>
-          Create an account now
+          Создайте учетную запись прямо сейчас
         </Text>
 
 
         <Box marginTop={"l"}>
           <Box marginBottom={"m"}>
             <TextInput icon={"mail"}
-              placeholder={"enter your email adress"}
+              placeholder={"введите адрес электронной почты"}
               onChangeText={handleChange("email")}
               onBlur={handleBlur("email")}
               error={errors.email}
@@ -111,7 +111,7 @@ const SignUpScreen = ({ navigation }: StackNavigatorProps<AuthenticationRoutes, 
               ref={password}
               onChangeText={handleChange("password")}
               onBlur={handleBlur("password")}
-              placeholder={"Enter your password"}
+              placeholder={"придумайте пароль"}
               error={errors.password}
               touched={touched.password}
               autoCompleteType={"password"}
@@ -127,7 +127,7 @@ const SignUpScreen = ({ navigation }: StackNavigatorProps<AuthenticationRoutes, 
             ref={passwordConfirmation}
             onChangeText={handleChange("passwordConfirmation")}
             onBlur={handleBlur("passwordConfirmation")}
-            placeholder={"Confirm your password"}
+            placeholder={"подтвердите пароль"}
             error={errors.passwordConfirmation}
             touched={touched.passwordConfirmation}
             secureTextEntry
@@ -140,7 +140,7 @@ const SignUpScreen = ({ navigation }: StackNavigatorProps<AuthenticationRoutes, 
           <Box alignItems={"center"} marginTop={"xl"}>
             <Button variant={"primary"}
               onPress={handleSubmit}
-              label={"Create an account"}
+              label={"создать аккаунт"}
             />
 
           </Box>

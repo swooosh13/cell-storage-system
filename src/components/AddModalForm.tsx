@@ -1,15 +1,16 @@
-import React, {useRef, useState} from 'react';
-import {Modal, TextInput, StyleSheet, TouchableOpacity, Dimensions} from "react-native";
-import {addItem, toggleAddModal} from "../redux/reducers/items-reducer/itemsActions";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../redux/store";
+import React, { useRef, useState } from 'react';
+import { Modal, TextInput, StyleSheet, TouchableOpacity, Dimensions } from "react-native";
+import { addItem, toggleAddModal } from "../redux/reducers/items-reducer/itemsActions";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
-import {Box, Text, theme} from './Theme';
-import {useFormik} from "formik";
-import {RadioButton} from 'react-native-paper';
+import { Box, Text, theme } from './Theme';
+import { useFormik } from "formik";
+import { RadioButton } from 'react-native-paper';
 
 import * as Yup from "yup";
-import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { itemsAPI } from '../redux/api/api';
 
 const ModalSchema = Yup.object().shape({
   name: Yup.string()
@@ -19,7 +20,7 @@ const ModalSchema = Yup.object().shape({
   description: Yup.string().min(2, 'Too short!').required('required')
 });
 
-const {height} = Dimensions.get('screen')
+const { height } = Dimensions.get('screen')
 
 const AddModalForm = () => {
   const dispatch = useDispatch();
@@ -37,45 +38,46 @@ const AddModalForm = () => {
     errors,
     setFieldValue,
   } = useFormik({
-    initialValues: {name: "", description: '', position: "", sector: ""},
+    initialValues: { name: "", description: '', position: "", sector: "" },
     validationSchema: ModalSchema,
-    onSubmit: (values) => {
-      dispatch(addItem({...values, id: Math.floor(Math.random() * 1000000)}));
+    onSubmit: async (values) => {
+      const itemId = await itemsAPI.getlastId();
+      dispatch(addItem({ ...values, id: itemId.data.id + 1 }));
       dispatch(toggleAddModal());
     }
   });
 
   return (
     <Modal visible={visible}
-           animationType={"slide"}
-           transparent={false}
-           onRequestClose={() => dispatch(toggleAddModal())}>
+      animationType={"slide"}
+      transparent={false}
+      onRequestClose={() => dispatch(toggleAddModal())}>
       <Box
-           style={{marginTop: height / 6}}
-           justifyContent={"center"}
-           flex={1}>
+        style={{ marginTop: height / 6 }}
+        justifyContent={"center"}
+        flex={1}>
         <KeyboardAwareScrollView>
           <Box marginBottom={"m"} marginHorizontal={"l"}>
 
             <Box marginBottom={"m"}>
-              <Text variant={"title1"}>Add Item form</Text>
+              <Text variant={"title1"}>Форма добавления</Text>
             </Box>
 
-            <Text variant={"title2"}>name</Text>
+            <Text variant={"title2"}>название</Text>
             <Box borderColor={"secondary"} borderWidth={StyleSheet.hairlineWidth * 0.7} borderRadius={"m"}
-                 padding={"s"}>
+              padding={"s"}>
               <TextInput
                 placeholder={"mk-254"}
                 onChangeText={handleChange("name")}
                 onEndEditing={handleBlur("name")}
                 autoCapitalize={"none"}
-                onSubmitEditing={() => description.current?.focus()}/>
+                onSubmitEditing={() => description.current?.focus()} />
             </Box>
 
             <Box marginTop={"s"}>
-              <Text variant={"title2"}>description</Text>
+              <Text variant={"title2"}>описание</Text>
               <Box borderColor={"secondary"} borderWidth={StyleSheet.hairlineWidth * 0.7} borderRadius={"m"}
-                   padding={"s"}>
+                padding={"s"}>
                 <TextInput
                   ref={description}
                   onChangeText={handleChange("description")}
@@ -89,31 +91,31 @@ const AddModalForm = () => {
             </Box>
 
             <Box marginTop={"s"}>
-              <Text variant={"title2"}>sector</Text>
+              <Text variant={"title2"}>сектор</Text>
               <Box flexDirection={"row"} alignItems={"center"}>
                 <Text variant={"body"}>A</Text>
                 <RadioButton value={"A"} onPress={() => {
                   setChecked('A');
                   setFieldValue("sector", "A");
-                }} status={checked === 'A' ? 'checked' : 'unchecked'}/>
+                }} status={checked === 'A' ? 'checked' : 'unchecked'} />
                 <Text variant={"body"}>B</Text>
                 <RadioButton value={"B"} onPress={() => {
                   setChecked('B');
                   setFieldValue("sector", "B");
-                }} status={checked === 'B' ? 'checked' : 'unchecked'}/>
+                }} status={checked === 'B' ? 'checked' : 'unchecked'} />
                 <Text variant={"body"}>C</Text>
                 <RadioButton value={"C"} onPress={() => {
                   setChecked('C')
                   setFieldValue("sector", "C");
                 }
-                } status={checked === 'C' ? 'checked' : 'unchecked'}/>
+                } status={checked === 'C' ? 'checked' : 'unchecked'} />
               </Box>
             </Box>
 
             <Box marginTop={"s"}>
-              <Text variant={"title2"}>position</Text>
+              <Text variant={"title2"}>позиция</Text>
               <Box borderColor={"secondary"} borderWidth={StyleSheet.hairlineWidth * 0.7} borderRadius={"m"}
-                   padding={"s"}>
+                padding={"s"}>
                 <TextInput
                   ref={position}
                   onChangeText={handleChange("position")}
@@ -130,7 +132,7 @@ const AddModalForm = () => {
           <Box alignItems={"center"} marginTop={"s"}>
             {/*@ts-ignore TODO */}
             <TouchableOpacity activeOpacity={0.8} style={styles.container} onPress={handleSubmit}>
-              <Text variant={"button"} color={"white"}>ADD</Text>
+              <Text variant={"button"} color={"white"}>Добавить</Text>
             </TouchableOpacity>
           </Box>
         </KeyboardAwareScrollView>

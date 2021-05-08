@@ -31,8 +31,8 @@ const SignInScreen = ({ navigation }: StackNavigatorProps<AuthenticationRoutes, 
   const [visible, setVisible] = useState(false);
 
   const footer = (
-    <Footer title={"If you don`t have a account"}
-      action={"Sign Up"}
+    <Footer title={"Если у вас нет аккаунта: "}
+      action={"присоединиться"}
       onPress={() => navigation.navigate('SignUpScreen')} />
   )
 
@@ -90,19 +90,19 @@ const SignInScreen = ({ navigation }: StackNavigatorProps<AuthenticationRoutes, 
         <Text variant={"title1"}
           textAlign={"center"}
           marginBottom={"m"}>
-          Welcome Back
+          Добро пожаловать
         </Text>
         <Text variant={"body"}
           textAlign={"center"}
           marginBottom={"l"}>
-          Use your credentials below and login to your account
+          Используйте ваши учетные данные и авторизуйтесь
         </Text>
 
 
         <Box marginTop={"l"}>
           <Box marginBottom={"m"}>
             <TextInput icon={"mail"}
-              placeholder={"enter your email adress"}
+              placeholder={"введите адрес электронной почты"}
               onChangeText={handleChange("email")}
               onBlur={handleBlur("email")}
               error={errors.email}
@@ -116,7 +116,7 @@ const SignInScreen = ({ navigation }: StackNavigatorProps<AuthenticationRoutes, 
             ref={password}
             onChangeText={handleChange("password")}
             onBlur={handleBlur("password")}
-            placeholder={"Enter your password"}
+            placeholder={"ввидите пароль"}
             error={errors.password}
             touched={touched.password}
             secureTextEntry
@@ -129,21 +129,20 @@ const SignInScreen = ({ navigation }: StackNavigatorProps<AuthenticationRoutes, 
             flexDirection={"row"}
             alignItems={"center"}
             justifyContent={"space-between"}>
-            <Checkbox label={"remember me"}
+            <Checkbox label={"запомнить меня"}
               checked={values.remember}
               onChange={() => setFieldValue("remember", !values.remember)} />
 
             <RectButton onPress={() => navigation.navigate('ForgotPasswordScreen')}>
-              <Text variant={"button"} color={"primary"}> Forgot password?</Text>
+              <Text variant={"button"} color={"primary"}>забыли пароль?</Text>
             </RectButton>
           </Box>
 
           <Box alignItems={"center"} marginTop={"xl"}>
             <Button variant={"primary"}
               onPress={handleSubmit}
-              label={"Log into your account"}
+              label={"Вход в аккаунт"}
             />
-
           </Box>
         </Box>
       </Box>

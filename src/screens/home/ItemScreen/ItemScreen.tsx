@@ -35,12 +35,15 @@ const ItemScreen = ({ navigation, route }: StackNavigatorProps<MainRoutes, "Item
   let item = useSelector((state: RootState) => state.items.allItems.filter((item: any) => item.id === itemId))[0];
   const [checked, setChecked] = useState<string>(item.sector);
 
-
   const onCancel = () => {
     setVisibleUpdate(!visibleUpdate);
     setChecked('');
     console.log(visibleUpdate);
   }
+
+  useEffect(() => {
+    console.log(checked);
+  }, [])
 
   const onUpdateItem = (item: ItemType) => {
     dispatch(updateItem(item));
@@ -66,6 +69,7 @@ const ItemScreen = ({ navigation, route }: StackNavigatorProps<MainRoutes, "Item
     initialValues: { name: item.name, description: item.description, sector: item.sector, position: item.position, id: item.id },
     validationSchema: ModalSchema,
     onSubmit: (values) => {
+      console.log(values);
       setVisibleUpdate(!visibleUpdate);
       onUpdateItem(values);
     }
@@ -94,12 +98,10 @@ const ItemScreen = ({ navigation, route }: StackNavigatorProps<MainRoutes, "Item
 
         <Box borderRadius={"s"} backgroundColor="darkGrey" padding={"l"} width={width * 0.7} marginTop={"s"}>
           <Text color={"white"} variant={"title2"}>{item.description}</Text>
-          <Text color={"white"} variant={"body"}>sector: {item.sector}</Text>
-          <Text color={"white"} variant={"body"}>position: {item.position}</Text>
+          <Text color={"white"} variant={"body"}>сектор: {item.sector}</Text>
+          <Text color={"white"} variant={"body"}>позиция: {item.position}</Text>
         </Box>
-
       </Box>
-
       <Box flexDirection={"row"} marginTop={"s"}>
         <TouchableOpacity activeOpacity={0.78}>
           <Button onPress={onCancel} variant={"primary"} label={"переместить"}
@@ -133,10 +135,10 @@ const ItemScreen = ({ navigation, route }: StackNavigatorProps<MainRoutes, "Item
               <Box marginBottom={"m"} marginHorizontal={"l"}>
 
                 <Box marginBottom={"m"}>
-                  <Text variant={"title1"}>Update Item form</Text>
+                  <Text variant={"title1"}>Обновить предмет</Text>
                 </Box>
 
-                <Text variant={"title2"}>name</Text>
+                <Text variant={"title2"}>навзвание</Text>
                 <Box borderColor={"secondary"} borderWidth={StyleSheet.hairlineWidth * 0.7} borderRadius={"m"}
                   padding={"s"}>
                   <TextInput
@@ -149,7 +151,7 @@ const ItemScreen = ({ navigation, route }: StackNavigatorProps<MainRoutes, "Item
                 </Box>
 
                 <Box marginTop={"s"}>
-                  <Text variant={"title2"}>description</Text>
+                  <Text variant={"title2"}>описание</Text>
                   <Box borderColor={"secondary"} borderWidth={StyleSheet.hairlineWidth * 0.7} borderRadius={"m"}
                     padding={"s"}>
                     <TextInput
@@ -167,7 +169,7 @@ const ItemScreen = ({ navigation, route }: StackNavigatorProps<MainRoutes, "Item
                 </Box>
 
                 <Box marginTop={"s"}>
-                  <Text variant={"title2"}>sector</Text>
+                  <Text variant={"title2"}>сектор</Text>
                   <Box flexDirection={"row"} alignItems={"center"}>
                     <Text variant={"body"}>A</Text>
                     <RadioButton value={"A"} onPress={() => {
@@ -189,7 +191,7 @@ const ItemScreen = ({ navigation, route }: StackNavigatorProps<MainRoutes, "Item
                 </Box>
 
                 <Box marginTop={"s"}>
-                  <Text variant={"title2"}>position</Text>
+                  <Text variant={"title2"}>позиция</Text>
                   <Box borderColor={"secondary"} borderWidth={StyleSheet.hairlineWidth * 0.7} borderRadius={"m"}
                     padding={"s"}>
                     <TextInput

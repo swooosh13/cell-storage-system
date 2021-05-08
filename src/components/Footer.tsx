@@ -13,7 +13,6 @@ interface IFooterProps {
 const Footer: FC<IFooterProps> = ({onPress, title, action}) => {
   return (
     <>
-      <SocialLogin/>
       <Box alignItems={"center"} marginTop={"m"}>
         <BorderlessButton {...{onPress}}>
           <Text variant={"button"} color={"white"}>

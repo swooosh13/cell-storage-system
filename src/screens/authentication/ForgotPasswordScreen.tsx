@@ -22,8 +22,8 @@ interface ForgotPasswordScreen {
 
 const ForgotPasswordScreen: FC<ForgotPasswordScreen> = ({navigation}) => {
 
-  const footer = (<Footer title={"Don`t work ? "}
-                          action={"Try something else"}
+  const footer = (<Footer title={"Не работает ? "}
+                          action={"Попробовать что-то еще"}
                           onPress={() => Linking.openURL("https://support.google.com/")}/>);
 
   const {
@@ -47,18 +47,18 @@ const ForgotPasswordScreen: FC<ForgotPasswordScreen> = ({navigation}) => {
           <Text variant={"title1"}
                 textAlign={"center"}
                 marginBottom={"m"}>
-            Forgot Password?
+            Забыл пароль?
           </Text>
           <Text variant={"body"}
                 textAlign={"center"}>
-            enter the email that is associated with your account
+            введите email связанный с вашей учетной записью
           </Text>
         </Box>
 
         <Box marginTop={"l"}>
           <Box marginBottom={"m"}>
             <TextInput icon={"mail"}
-                       placeholder={"enter your email adress"}
+                       placeholder={"введите адрес электронной почты"}
                        onChangeText={handleChange("email")}
                        onBlur={handleBlur("email")}
                        error={errors.email}
@@ -73,7 +73,7 @@ const ForgotPasswordScreen: FC<ForgotPasswordScreen> = ({navigation}) => {
           <Box alignItems={"center"} marginTop={"s"}>
             <Button variant={"primary"}
                     onPress={handleSubmit}
-                    label={"reset password"}
+                    label={"сбросить пароль"}
             />
 
           </Box>

@@ -53,7 +53,7 @@ const SettingsScreen = () => {
       </Box>
 
       <Box marginBottom={"xl"} flex={1}>
-        <Button variant={"primary"} label={"Sign Out"} onPress={handleLogout} />
+        <Button variant={"primary"} label={"Выход"} onPress={handleLogout} />
       </Box>
     </Box>
 
