@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { IItems, ItemType } from "../reducers/items-reducer/items";
 import {API_ITEMS_KEY, API_ITEMS_URL, API_USERS_URL} from "@env";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const itemsInstance = axios.create({
   withCredentials: true,
@@ -10,10 +11,15 @@ const itemsInstance = axios.create({
   }
 });
 
+const retreiveToken = async () => {
+  return await AsyncStorage.getItem('userToken');
+}
+
 const usersInstance = axios.create({
   withCredentials: true,
   baseURL: API_USERS_URL
 });
+
 
 export const itemsAPI = {
   getItemById(id: number): any {
@@ -48,5 +54,20 @@ export const usersAPI = {
   },
   register(email:string, password: string): any {
     return usersInstance.post('auth/register', {email, password});
+  },
+  getUser(number: number, config: any): any {
+    return usersInstance.get(`users/${number}`, config);
+  },
+  getAllPosts(page: number, limit: number, config: any): any {
+    return usersInstance.get(`posts/all?page=${page}&limit=${limit}`, config);
+  },
+  createPost(title: string, content: string, userId: number, config: any): any {
+    return usersInstance.post(`posts/add`, {title, content, userId}, config);
+  },
+  getUserByEmail(email: string, config: any): any {
+    return usersInstance.get(`users/all?email=${email}`, config);
+  },
+  deleteUserPosts(id: any, config: any): any {
+    return usersInstance.delete(`users/posts/${id}`, config);
   }
  }

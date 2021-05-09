@@ -1,6 +1,7 @@
 import { AppDispatch } from "../../store";
 import { itemsAPI } from "../../api/api";
 import { ItemsActionTypes, ItemType } from "./items";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const getItemById = (val: number) => async (dispatch: AppDispatch) => {
   let response = await itemsAPI
@@ -41,6 +42,7 @@ export const loadItems = (val: string = "", description: string = "") => async (
   try {
     if (val === "") {
       console.log("loadItems() AC: -getAll");
+      // console.log("Token:",await AsyncStorage.getItem('userToken'));
       response = await itemsAPI
         .getItems()
         .then((response: any) => response.data);

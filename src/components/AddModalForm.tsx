@@ -10,7 +10,10 @@ import { RadioButton } from 'react-native-paper';
 
 import * as Yup from "yup";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { itemsAPI } from '../redux/api/api';
+import { itemsAPI, usersAPI } from '../redux/api/api';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
+const token = AsyncStorage.getItem('userToken');
 
 const ModalSchema = Yup.object().shape({
   name: Yup.string()
@@ -44,6 +47,21 @@ const AddModalForm = () => {
       const itemId = await itemsAPI.getlastId();
       dispatch(addItem({ ...values, id: itemId.data.id + 1 }));
       dispatch(toggleAddModal());
+      
+      const title = "добавил";
+      const content = values.name + " " + values.description + " [" + values.position + "(" + values.sector + ")" + "]";
+      const userId = await AsyncStorage.getItem('userId');
+      let config = {
+        headers: {
+          Authorization: "Bearer " + JSON.parse(token._W)
+        }
+      }
+      try {
+
+        const resp = await usersAPI.createPost(title, content, userId, config);
+      } catch (e) {
+        console.log(e);
+      }
     }
   });
 

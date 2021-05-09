@@ -16,8 +16,6 @@ const AuthenticationNavigator = () => {
       <Stack.Screen name={"SplashScreen"} component={SplashScreen}/>
       <Stack.Screen name={"SignInScreen"} component={SignInScreen} />
       <Stack.Screen name={"SignUpScreen"} component={SignUpScreen} />
-      <Stack.Screen name={"ForgotPasswordScreen"} component={ForgotPasswordScreen} />
-      <Stack.Screen name={"ChangedPasswordScreen"} component={ChangedPasswordScreen} />
     </Stack.Navigator>
   )
 }

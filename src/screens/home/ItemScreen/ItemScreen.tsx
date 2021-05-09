@@ -15,6 +15,9 @@ import { ItemType } from '../../../redux/reducers/items-reducer/items';
 import { RootState } from '../../../redux/store';
 import { useNavigation } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { usersAPI } from '../../../redux/api/api';
+const token = AsyncStorage.getItem('userToken');
 
 const { width, height } = Dimensions.get('window');
 
@@ -38,16 +41,24 @@ const ItemScreen = ({ navigation, route }: StackNavigatorProps<MainRoutes, "Item
   const onCancel = () => {
     setVisibleUpdate(!visibleUpdate);
     setChecked('');
-    console.log(visibleUpdate);
   }
 
-  useEffect(() => {
-    console.log(checked);
-  }, [])
-
-  const onUpdateItem = (item: ItemType) => {
+  const onUpdateItem = async (item: ItemType) => {
     dispatch(updateItem(item));
     dispatch(loadItems());
+    const title = "переместил";
+      const content = item.name + " " + item.description + " [" + item.position + "(" + item.sector + ")" + "]";
+      const userId = await AsyncStorage.getItem('userId');
+      let config = {
+        headers: {
+          Authorization: "Bearer " + JSON.parse(token._W)
+        }
+      }
+      try {
+        const resp = await usersAPI.createPost(title, content, userId, config);
+      } catch (e) {
+        console.log(e);
+      }
   };
 
   const onBack = () => {
@@ -69,7 +80,6 @@ const ItemScreen = ({ navigation, route }: StackNavigatorProps<MainRoutes, "Item
     initialValues: { name: item.name, description: item.description, sector: item.sector, position: item.position, id: item.id },
     validationSchema: ModalSchema,
     onSubmit: (values) => {
-      console.log(values);
       setVisibleUpdate(!visibleUpdate);
       onUpdateItem(values);
     }

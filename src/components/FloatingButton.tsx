@@ -1,11 +1,14 @@
-import React, {useState} from 'react';
-import {View, StyleSheet, Animated, TouchableWithoutFeedback} from "react-native";
+import React, { useState } from 'react';
+import { View, StyleSheet, Animated, TouchableWithoutFeedback, Alert } from "react-native";
 
-import {AntDesign} from "@expo/vector-icons";
-import {connect} from "react-redux";
-import {theme} from "./Theme";
-import {TouchableOpacity} from "react-native-gesture-handler";
+import { AntDesign } from "@expo/vector-icons";
+import { connect } from "react-redux";
+import { theme } from "./Theme";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { usersAPI } from '../redux/api/api';
 
+const token = AsyncStorage.getItem('userToken');
 class FloatingButton extends React.Component<any, any> {
 
   animation = new Animated.Value(0);
@@ -28,21 +31,25 @@ class FloatingButton extends React.Component<any, any> {
   render() {
     const addstyle = {
       transform: [
-        {scale: this.animation},
-        {translateY: this.animation.interpolate({
-            inputRange: [0,1],
+        { scale: this.animation },
+        {
+          translateY: this.animation.interpolate({
+            inputRange: [0, 1],
             outputRange: [0, -70]
-          })}
+          })
+        }
       ]
     }
 
     const filterstyle = {
       transform: [
-        {scale: this.animation},
-        {translateY: this.animation.interpolate({
-            inputRange: [0,1],
+        { scale: this.animation },
+        {
+          translateY: this.animation.interpolate({
+            inputRange: [0, 1],
             outputRange: [0, -130]
-          })}
+          })
+        }
       ]
     }
 
@@ -59,32 +66,66 @@ class FloatingButton extends React.Component<any, any> {
       inputRange: [0, 0.5, 1],
       outputRange: [0, 0, 1]
     })
+
+    const removeUserHistory = () => {
+      console.log('remove item Alert')
+      Alert.alert(
+        `Удалить историю действий пользователя ?`,
+        "Подтвердите операцию",
+        [
+          {
+            text: "Омена",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+          },
+          {
+            text: "Подтвердить", onPress: async () => {
+
+              let config = {
+                headers: {
+                  Authorization: "Bearer " + JSON.parse(token._W)
+                }
+              }
+
+              try {
+                const userId = await AsyncStorage.getItem('userId');
+                const resp = await usersAPI.deleteUserPosts(userId, config);
+                
+              } catch (e) {
+                console.log(e);
+              }
+            }
+          }
+        ]
+      );
+    }
+
     return (
       <View style={[styles.container, this.props.style]}>
 
-        <TouchableWithoutFeedback>
+        <TouchableWithoutFeedback onPress={() => removeUserHistory()}>
           <Animated.View style={[styles.button, styles.secondary, filterstyle]}>
             <TouchableOpacity>
-              <AntDesign name={"swap"} size={24} color={"black"}/>
+              <AntDesign name={"swap"} size={24} color={"black"} />
             </TouchableOpacity>
-            </Animated.View>
+          </Animated.View>
         </TouchableWithoutFeedback>
 
         <TouchableWithoutFeedback onPress={() => this.props.openAdd()}>
           <Animated.View style={[styles.button, styles.secondary, addstyle, opactity]}>
             <TouchableOpacity>
-              <AntDesign name={"plus"} size={24} color={"black"}/>
+              <AntDesign name={"plus"} size={24} color={"black"} />
             </TouchableOpacity>
           </Animated.View>
         </TouchableWithoutFeedback>
 
 
         <TouchableWithoutFeedback onPress={this.toggleMenu}>
-            <Animated.View style={[styles.button, styles.menu, rotation, opactity]}>
-              <TouchableOpacity>
-                <AntDesign name={"arrowup"} size={24} color={"#fff"}/>
-              </TouchableOpacity>
-               </Animated.View>
+          <Animated.View style={[styles.button, styles.menu, rotation, opactity]}>
+            <TouchableOpacity>
+              <AntDesign name={"arrowup"} size={24} color={"#fff"} />
+            </TouchableOpacity>
+          </Animated.View>
         </TouchableWithoutFeedback>
       </View>
     )

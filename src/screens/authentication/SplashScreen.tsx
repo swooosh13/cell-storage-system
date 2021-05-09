@@ -66,9 +66,6 @@ const SplashScreen = ({navigation}: StackNavigatorProps<AuthenticationRoutes, "S
                   onPress={() => navigation.navigate('SignInScreen')}/>
           <Button label={"Зарегестрироваться"} onPress={() => navigation.navigate('SignUpScreen')}/>
 
-          <BorderlessButton onPress={() => navigation.navigate('ForgotPasswordScreen')}>
-            <Text variant={"button"} color={"secondary"}>Забыли пароль?</Text>
-          </BorderlessButton>
 
         </Box>
       </Box>

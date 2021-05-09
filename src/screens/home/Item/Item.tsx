@@ -1,17 +1,20 @@
-import React, {FC} from "react";
-import {Box, Text} from "../../../components/Theme";
-import {removeItem} from "../../../redux/reducers/items-reducer/itemsActions";
-import {Alert, TouchableOpacity} from "react-native";
-import {useDispatch} from "react-redux";
+import React, { FC } from "react";
+import { Box, Text } from "../../../components/Theme";
+import { removeItem } from "../../../redux/reducers/items-reducer/itemsActions";
+import { Alert, TouchableOpacity } from "react-native";
+import { useDispatch } from "react-redux";
 
-import {ItemType} from "../../../redux/reducers/items-reducer/items";
+import { ItemType } from "../../../redux/reducers/items-reducer/items";
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { usersAPI } from "../../../redux/api/api";
+const token = AsyncStorage.getItem('userToken');
 interface IItemProps {
   item: ItemType;
   goToItem: (item: ItemType) => void;
 }
 
-const Item: FC<IItemProps> = ({item, goToItem}) => {
+const Item: FC<IItemProps> = ({ item, goToItem }) => {
   const dispatch = useDispatch();
 
   const removeItemHandler = () => {
@@ -25,7 +28,25 @@ const Item: FC<IItemProps> = ({item, goToItem}) => {
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        {text: "Подтвердить", onPress: () => dispatch(removeItem(item.id))}
+        {
+          text: "Подтвердить", onPress: async () => {
+            dispatch(removeItem(item.id))
+
+            const title = "удалил";
+            const content = item.name + " " + item.description + " [" + item.position + "(" + item.sector + ")" + "]";
+            const userId = await AsyncStorage.getItem('userId');
+            let config = {
+              headers: {
+                Authorization: "Bearer " + JSON.parse(token._W)
+              }
+            }
+            try {
+              const resp = await usersAPI.createPost(title, content, userId, config);
+            } catch (e) {
+              console.log(e);
+            }
+          }
+        }
       ]
     );
   }
@@ -43,20 +64,20 @@ const Item: FC<IItemProps> = ({item, goToItem}) => {
       onLongPress={removeItemHandler}>
 
       <Box marginBottom={"s"}
-           backgroundColor={"grey"}
-           flex={1}
-           flexDirection={"row"}
-           marginVertical={"s"}
-           marginHorizontal={"s"}
-           borderRadius={"m"}
-           alignContent={"center"}
-           justifyContent={"center"}>
+        backgroundColor={"grey"}
+        flex={1}
+        flexDirection={"row"}
+        marginVertical={"s"}
+        marginHorizontal={"s"}
+        borderRadius={"m"}
+        alignContent={"center"}
+        justifyContent={"center"}>
         <Box flex={1}
-             alignItems={"center"}
-             backgroundColor={"secondary"}
-             borderTopLeftRadius={"s"}
-             borderBottomLeftRadius={"s"}
-             justifyContent={"center"}>
+          alignItems={"center"}
+          backgroundColor={"secondary"}
+          borderTopLeftRadius={"s"}
+          borderBottomLeftRadius={"s"}
+          justifyContent={"center"}>
           <Text color={"white"} variant={"body"}>{item.name}</Text>
         </Box>
 

@@ -10,7 +10,7 @@ export interface IAuthState {
 const initialState: IAuthState = {
   isLoading: true,
   userEmail: null,
-  userToken: null
+  userToken: null,
 }
 
 export const auth = (state: IAuthState = initialState, action: AnyAction) => {

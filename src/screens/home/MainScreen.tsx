@@ -1,27 +1,29 @@
-import React, {useEffect, useState} from 'react';
-import {SearchBar} from "react-native-elements";
-import {Dimensions, FlatList, SafeAreaView, Text , StyleSheet, Modal} from "react-native";
-import {useDispatch, useSelector} from "react-redux";
+import React, { useEffect, useState } from 'react';
+import { SearchBar } from "react-native-elements";
+import { Dimensions, FlatList, SafeAreaView, Text, StyleSheet, Modal, Alert } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 
-import {RootState} from "../../redux/store";
-import {loadItems, toggleAddModal} from "../../redux/reducers/items-reducer/itemsActions";
-import {IItems, ItemType} from '../../redux/reducers/items-reducer/items'
+import { RootState } from "../../redux/store";
+import { loadItems, toggleAddModal } from "../../redux/reducers/items-reducer/itemsActions";
+import { IItems, ItemType } from '../../redux/reducers/items-reducer/items'
 
 import Item from "./Item/Item";
-import {MainRoutes, StackNavigatorProps} from "../../components/Navigation";
-import {Feather} from '@expo/vector-icons';
-import {Box, theme, useTheme} from "../../components/Theme";
+import { MainRoutes, StackNavigatorProps } from "../../components/Navigation";
+import { Feather } from '@expo/vector-icons';
+import { Box, theme, useTheme } from "../../components/Theme";
 import AddModalForm from "../../components/AddModalForm";
 import FloatingButton from "../../components/FloatingButton";
+import { usersAPI } from '../../redux/api/api';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const MainScreen = ({navigation}: StackNavigatorProps<MainRoutes, "MainScreen">) => {
+const MainScreen = ({ navigation }: StackNavigatorProps<MainRoutes, "MainScreen">) => {
   let [searchText, setSearchText] = useState<string>("");
   const dispatch = useDispatch();
   const theme = useTheme();
   const items = useSelector((state: RootState) => state.items);
 
   // @ts-ignore TODO
-  const [position, setPosition] = useState<any>({height, width});
+  const [position, setPosition] = useState<any>({ height, width });
   const allItems: IItems = items.allItems;
 
   const goToItemScreen = (item: ItemType) => {
@@ -40,7 +42,7 @@ const MainScreen = ({navigation}: StackNavigatorProps<MainRoutes, "MainScreen">)
     dispatch(toggleAddModal());
   }
 
-  const {width, height} = Dimensions.get("screen");
+  const { width, height } = Dimensions.get("screen");
 
   useEffect(() => {
     // для широкоэкранных
@@ -57,30 +59,32 @@ const MainScreen = ({navigation}: StackNavigatorProps<MainRoutes, "MainScreen">)
     }
   }, [width, height]);
 
+
+
   return (
-    <SafeAreaView style={{marginBottom: height * 0.1}}>
+    <SafeAreaView style={{ marginBottom: height * 0.1 }}>
       {/*@ts-ignore*/}
       <SearchBar lightTheme={"platform"}
-                 platform={"default"}
-                 round
-                 inputStyle={{color: "black"}}
-                 containerStyle={{backgroundColor: theme.colors.greyLight}}
-                 inputContainerStyle={{backgroundColor: theme.colors.white}}
-                 value={searchText}
-                 searchIcon={(<Feather name="search" size={18} color="grey"/>)}
-                 onChangeText={setSearchText}/>
+        platform={"default"}
+        round
+        inputStyle={{ color: "black" }}
+        containerStyle={{ backgroundColor: theme.colors.greyLight }}
+        inputContainerStyle={{ backgroundColor: theme.colors.white }}
+        value={searchText}
+        searchIcon={(<Feather name="search" size={18} color="grey" />)}
+        onChangeText={setSearchText} />
 
       <FlatList data={allItems}
-                showsVerticalScrollIndicator={false}
-                keyExtractor={(item) => {
-                  return item.id.toString()
-                }} renderItem={({item}) =>
-        (<Item item={item} goToItem={goToItemScreen}/>)}/>
+        showsVerticalScrollIndicator={false}
+        keyExtractor={(item) => {
+          return item.id.toString()
+        }} renderItem={({ item }) =>
+          (<Item item={item} goToItem={goToItemScreen} />)} />
 
       <AddModalForm />
       <FloatingButton
         openAdd={openAddCallback}
-        style={{top: position.top, left: position.left}}/>
+        style={{ top: position.top, left: position.left }} />
 
     </SafeAreaView>
   )

@@ -125,19 +125,6 @@ const SignInScreen = ({ navigation }: StackNavigatorProps<AuthenticationRoutes, 
             onSubmitEditing={() => handleSubmit()}
           />
 
-          <Box marginVertical={"m"}
-            flexDirection={"row"}
-            alignItems={"center"}
-            justifyContent={"space-between"}>
-            <Checkbox label={"запомнить меня"}
-              checked={values.remember}
-              onChange={() => setFieldValue("remember", !values.remember)} />
-
-            <RectButton onPress={() => navigation.navigate('ForgotPasswordScreen')}>
-              <Text variant={"button"} color={"primary"}>забыли пароль?</Text>
-            </RectButton>
-          </Box>
-
           <Box alignItems={"center"} marginTop={"xl"}>
             <Button variant={"primary"}
               onPress={handleSubmit}
