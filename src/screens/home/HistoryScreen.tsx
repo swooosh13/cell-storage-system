@@ -1,12 +1,8 @@
-import React, { useEffect } from 'react';
-import { Box, Text } from "../../components/Theme";
-import FloatingButton from "../../components/FloatingButton";
-import { SafeAreaView, View, Text as RNText, FlatList, StyleSheet, Dimensions } from "react-native";
+import React from 'react';
+import { Box, Text, theme } from "../../components/Theme";
+import { View, Text as RNText, FlatList, StyleSheet, Dimensions } from "react-native";
 import { usersAPI } from '../../redux/api/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-import { ListItem } from 'react-native-elements';
-import { backgroundColor } from '@shopify/restyle';
 
 const token = AsyncStorage.getItem('userToken');
 class HistoryScreen extends React.Component {
@@ -17,12 +13,13 @@ class HistoryScreen extends React.Component {
     isRefreshing: false,
   };
 
-  loadUsers = () => {
+  loadPosts = () => {
     const { posts, page } = this.state;
     this.setState({ isLoading: true });
 
     let config = {
       headers: {
+        // @ts-ignore
         Authorization: "Bearer " + JSON.parse(token._W)
       }
     }
@@ -40,7 +37,7 @@ class HistoryScreen extends React.Component {
     this.setState({
       isRefreshing: true,
     }, () => {
-      this.loadUsers();
+      this.loadPosts();
     });
   };
 
@@ -48,12 +45,12 @@ class HistoryScreen extends React.Component {
     this.setState({
       page: this.state.page + 1
     }, () => {
-      this.loadUsers();
+      this.loadPosts();
     });
   };
 
   componentDidMount() {
-    this.loadUsers();
+    this.loadPosts();
   };
 
   render() {
@@ -66,33 +63,34 @@ class HistoryScreen extends React.Component {
             <Box flexDirection="row"
               style={s.post} >
               <Box style={s.itemsInfo}>
-                <Text variant="body">action</Text>
+                <Text variant="body" color="white">действие</Text>
               </Box>
               <Box style={s.itemsInfo}>
-                <Text variant="body">item</Text>
+                <Text variant="body" color="white">предмет</Text>
               </Box>
               <Box style={s.itemsInfo}>
-                <Text variant="body">время </Text>
+                <Text variant="body" color="white">время</Text>
               </Box>
-              <Box style={s.userId}>
-                <Text variant="body">useId</Text>
+              <Box style={[s.userIdInfo]}>
+                <Text variant="body" color="white">userId</Text>
               </Box>
             </Box>
-            <Box style={{marginBottom: Dimensions.get('screen').height * 0.06}}>
+            <Box style={{ marginBottom: Dimensions.get('screen').height * 0.06 }}>
               <FlatList
+                showsVerticalScrollIndicator={false}
                 data={posts}
                 renderItem={({ item }: any) => (
                   // @ts-ignore
                   <Post post={item} />
                 )}
-                keyExtractor={(i: any) => i.id}
+                keyExtractor={(i: any) => String(i.id)}
                 refreshing={isRefreshing}
                 onRefresh={this.handleRefresh}
                 onEndReached={this.handleLoadMore}
+                // @ts-ignore
                 onEndThreshold={0}
               />
             </Box>
-
           </>
         }
       </View>
@@ -113,7 +111,7 @@ const Post = ({ post }: any) => {
       <Box style={s.container}>
         <Text variant="body">{post.createdAt} </Text>
       </Box>
-      <Box style={s.userId}>
+      <Box style={[s.userId, s.userIdItem]}>
         <Text variant="body">{post.userId}</Text>
       </Box>
     </Box>
@@ -125,18 +123,29 @@ const s = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: theme.colors.primary_greenLight,
+    minWidth: 50,
+    minHeight: 50,
+    margin: 2,
+    borderRadius: 5
+
   },
   itemsInfo: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: 10,
+    minWidth: 50,
+    minHeight: 25,
+    backgroundColor: theme.colors.button,
+    paddingTop: 1,
+    margin: 2,
+    borderRadius: 5
   },
   post: {
     flex: 3,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: "white",
+    backgroundColor: theme.colors.white,
     marginTop: 5,
     padding: 12,
 
@@ -145,8 +154,25 @@ const s = StyleSheet.create({
     flex: 0.6,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: "white",
-    marginTop: 5,
+    minHeight: 10,
+    minWidth: 10,
+    padding: 12,
+  },
+  userIdInfo: {
+    flex: 0.10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    minWidth: 50,
+    minHeight: 25,
+    backgroundColor: theme.colors.danger,
+    paddingTop: 1,
+    margin: 2,
+    borderRadius: 5
+  },
+  userIdItem: {
+    backgroundColor: theme.colors.greyLight,
+    margin: 2,
+    borderRadius: 5
   },
   userName: {
     fontSize: 17,

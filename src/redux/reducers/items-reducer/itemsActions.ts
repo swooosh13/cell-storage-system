@@ -42,7 +42,6 @@ export const loadItems = (val: string = "", description: string = "") => async (
   try {
     if (val === "") {
       console.log("loadItems() AC: -getAll");
-      // console.log("Token:",await AsyncStorage.getItem('userToken'));
       response = await itemsAPI
         .getItems()
         .then((response: any) => response.data);

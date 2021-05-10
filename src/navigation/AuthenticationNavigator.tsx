@@ -5,8 +5,6 @@ import {AuthenticationRoutes} from '../components/Navigation'
 import SignInScreen from "../screens/authentication/SignInScreen";
 import SignUpScreen from "../screens/authentication/SignUpScreen";
 import SplashScreen from "../screens/authentication/SplashScreen";
-import ForgotPasswordScreen from "../screens/authentication/ForgotPasswordScreen";
-import ChangedPasswordScreen from "../screens/authentication/ChangedPasswordScreen";
 
 const Stack = createStackNavigator<AuthenticationRoutes>();
 

@@ -39,7 +39,7 @@ const HomeNavigator = () => {
                   options={{
                     tabBarLabel: '',
                     tabBarIcon: ({color}) => (
-                      <Icon name={'home'} size={26} color={color}
+                      <Icon name={'cube'} size={26} color={color}
                       />
                     )
                   }}/>
@@ -57,7 +57,7 @@ const HomeNavigator = () => {
                   options={{
                     tabBarLabel: '',
                     tabBarIcon: ({color}) => (
-                      <Icon name={'stats-chart'} size={26} color={color}
+                      <Icon name={'at-outline'} size={26} color={color}
                       />
                     )
                   }}/>

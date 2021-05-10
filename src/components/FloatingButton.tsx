@@ -70,7 +70,7 @@ class FloatingButton extends React.Component<any, any> {
     const removeUserHistory = () => {
       console.log('remove item Alert')
       Alert.alert(
-        `Удалить историю действий пользователя ?`,
+        `Удалить историю действий текущего пользователя ?`,
         "Подтвердите операцию",
         [
           {
@@ -83,6 +83,7 @@ class FloatingButton extends React.Component<any, any> {
 
               let config = {
                 headers: {
+                  // @ts-ignore
                   Authorization: "Bearer " + JSON.parse(token._W)
                 }
               }
@@ -90,7 +91,6 @@ class FloatingButton extends React.Component<any, any> {
               try {
                 const userId = await AsyncStorage.getItem('userId');
                 const resp = await usersAPI.deleteUserPosts(userId, config);
-                
               } catch (e) {
                 console.log(e);
               }
@@ -99,14 +99,13 @@ class FloatingButton extends React.Component<any, any> {
         ]
       );
     }
-
     return (
       <View style={[styles.container, this.props.style]}>
 
         <TouchableWithoutFeedback onPress={() => removeUserHistory()}>
           <Animated.View style={[styles.button, styles.secondary, filterstyle]}>
             <TouchableOpacity>
-              <AntDesign name={"swap"} size={24} color={"black"} />
+              <AntDesign name={"deleteuser"} size={24} color={"black"} />
             </TouchableOpacity>
           </Animated.View>
         </TouchableWithoutFeedback>

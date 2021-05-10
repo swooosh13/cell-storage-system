@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { IItems, ItemType } from "../reducers/items-reducer/items";
+// @ts-ignore
 import {API_ITEMS_KEY, API_ITEMS_URL, API_USERS_URL} from "@env";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -69,5 +70,8 @@ export const usersAPI = {
   },
   deleteUserPosts(id: any, config: any): any {
     return usersInstance.delete(`users/posts/${id}`, config);
+  },
+  getAllUsers(config: any): any {
+    return usersInstance.get('users', config);
   }
  }

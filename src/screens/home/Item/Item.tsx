@@ -60,6 +60,7 @@ const Item: FC<IItemProps> = ({ item, goToItem }) => {
   }
   return (
     <TouchableOpacity
+    activeOpacity={0.66}
       onPress={navigateHandler}
       onLongPress={removeItemHandler}>
 

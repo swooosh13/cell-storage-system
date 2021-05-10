@@ -34,8 +34,8 @@ const SettingsScreen = () => {
       <Box
         flex={4}
         borderRadius={"l"}
-        paddingHorizontal="xl"
-        width={300}
+        padding="xl"
+        width={350}
         marginVertical="xl"
         alignItems={"center"}
         justifyContent="space-around"
@@ -57,10 +57,7 @@ const SettingsScreen = () => {
           </Text>
           <Text variant="body" textAlign="center">id :{userId}</Text>
         </Box>
-
-
       </Box>
-
       <Box marginBottom={"xl"} flex={1}>
         <Button variant={"primary"} label={"Выход"} onPress={handleLogout} />
       </Box>
